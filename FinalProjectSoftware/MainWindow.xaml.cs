@@ -36,7 +36,7 @@ namespace FinalProjectSoftware
                 VisaApplication newVisaApplicationAppointment = new();
                 newVisaApplicationAppointment.IsAvailable = true;
                 newVisaApplicationAppointment.Time = startTime.ToString("HH:mm:ss");
-                newVisaApplicationAppointment.Add(newVisaApplicationAppointment);
+                visaApplicationAppointments.Add(newVisaApplicationAppointment);
                 startTime = startTime.AddMinutes(30);
             }
             return visaApplicationAppointments;
