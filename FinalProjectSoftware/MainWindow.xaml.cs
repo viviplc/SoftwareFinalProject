@@ -1,4 +1,5 @@
 ﻿using System;
+using FinalProjectSoftware.Classes;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,5 +25,23 @@ namespace FinalProjectSoftware
         {
             InitializeComponent();
         }
+
+        private VisaApplicationList createVisaAppointments()
+        {
+            VisaApplicationList visaApplicationAppointments = new();
+            DateTime startTime = new(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 9, 0, 0);
+
+            for (int i = 0; i < 16; i++)
+            {
+                VisaApplication newVisaApplicationAppointment = new();
+                newVisaApplicationAppointment.IsAvailable = true;
+                newVisaApplicationAppointment.Time = startTime.ToString("HH:mm:ss");
+                newVisaApplicationAppointment.Add(newVisaApplicationAppointment);
+                startTime = startTime.AddMinutes(30);
+            }
+            return visaApplicationAppointments;
+        }
     }
+
+    
 }
