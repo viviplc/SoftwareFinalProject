@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FinalProjectSoftware"
         mc:Ignorable="d"
-        Title="MainWindow" Height="510" Width="800">
+        Title="MainWindow" Height="550" Width="850">
     <Grid>
         <Grid.Resources>
             <Style TargetType="Label">
@@ -22,7 +22,7 @@
             </Style>
             <Style TargetType="DatePicker">
                 <Setter Property="Text" Value=""/>
-                <Setter Property="Height" Value="25"/>
+                <Setter Property="Height" Value="30"/>
                 <Setter Property="Width" Value="150"/>
                 <Setter Property="FontSize" Value="12"/>
                 <Setter Property="Margin" Value="2"/>
@@ -83,10 +83,37 @@
         </StackPanel>
         <Button Name="btnApplyForVisa" Content="Apply for Visa" Grid.Row="1" Grid.Column="0" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <StackPanel Orientation="Vertical"  Grid.Row="0" Grid.Column="1">
-
+            <DataGrid Name="ApplicationsGrid" HorizontalAlignment="Left"  VerticalAlignment="Top"
+                  Height="350" Margin="10,10,0,0" 
+                  AutoGenerateColumns="False">
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        
+                    </Style>
+                </DataGrid.RowStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Hour" />
+                    <DataGridTextColumn Header="Name"/>
+                    <DataGridTextColumn Header="Age"/>
+                    <DataGridTextColumn Header="Birthday"/>
+                    <DataGridTextColumn Header="Country"/>
+                    <DataGridTextColumn Header="Passport"/>
+                    <DataGridTextColumn Header="Visa Type"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <ScrollViewer x:Name="ErrorScroll" Margin="10,5,0,0" Width="350" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" >
+                <TextBlock x:Name="LblErrorMessages" TextWrapping="Wrap"  Foreground="Red" FontSize="8" Text="Error Message"/>
+            </ScrollViewer>
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
-
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <Button Name="btnSearchByName" Content="Search by Name" VerticalAlignment="Top"/>
+                <TextBox x:Name="TxtSearchQuery" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <Button Name="btnDisplay" Content="Display Data" VerticalAlignment="Top"/>
+                <Button Name="btnSaveData" Content="Save Information" VerticalAlignment="Top"/>
+            </StackPanel>
         </StackPanel>
 
 
