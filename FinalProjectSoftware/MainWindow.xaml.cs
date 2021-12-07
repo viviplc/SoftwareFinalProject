@@ -96,6 +96,7 @@ namespace FinalProjectSoftware
                 }
             }
             visaApplicationCenter.TakenVisaApplicationAppointments = newAppointmentSlots;
+            //uncomment below line when appointmentsGrid is ready
             //AppointmentsGrid.ItemsSource = studio.TakenAppointments;
         }
 
@@ -155,6 +156,36 @@ namespace FinalProjectSoftware
             }
             visaApplicationCenter.VisaApplicationAppointments = allAppointments;
             visaApplicationCenter.AvailableVisaApplicationAppointments = availableAppointments;
+        }
+
+        private void btn_Search_Clicked(object sender, RoutedEventArgs e)
+        {
+            String searchQuery = TxtSearchQuery.Text;
+            if (searchQuery.Length > 0)
+            {
+                var query = from appt in visaApplicationCenter.TakenVisaApplicationAppointments
+                            where appt.Applicant.Name.ToLower().StartsWith(searchQuery.ToLower())
+                            select appt;
+                //uncomment below line when appointmentsGrid is ready
+                //AppointmentsGrid.ItemsSource = query;
+                TxtSearchQuery.Text = "";
+            }
+            else
+            {
+                MessageBox.Show("Empty search query");
+                //uncomment below line when appointmentsGrid is ready
+                //AppointmentsGrid.ItemsSource = visaApplicationCenter.TakenVisaApplicationAppointments;
+            }
+        }
+
+        private void btnDisplayClicked(object sender, RoutedEventArgs e)
+        {
+            ReadXMLFile();
+        }
+
+        private void btnSaveDataClicked(object sender, RoutedEventArgs e)
+        {
+            WriteXMLFile();
         }
     }
 
