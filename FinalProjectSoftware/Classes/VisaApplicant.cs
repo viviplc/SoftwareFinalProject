@@ -27,23 +27,16 @@ namespace FinalProjectSoftware.Classes
         public Visa Visa { get => visa; set => visa = value; }
         public short ChosenVisaType { get => chosenVisaType; set => chosenVisaType = value; }
 
-        public int CompareTo(IVisaApplicant other)
-        {
-            throw new NotImplementedException();
-        }
 
         public override string ToString()
         {
             return $"Name:  {name}, Age: {age}, Passport Number: {passportNumber}, Birthday: {Birthday}, Country: {Country}";
         }
 
-        /*
-        Will uncomment after IApplicant implementation is complete 
-        public int CompareTo(IApplicant other)
+        public int CompareTo(IVisaApplicant other)
         {
             return visa.CompareTo(other.Visa);
         }
 
-        */
     }
 }

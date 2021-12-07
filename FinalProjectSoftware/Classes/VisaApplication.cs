@@ -18,11 +18,6 @@ namespace FinalProjectSoftware.Classes
         public int ApplicationNumber { get => applicationNumber; set => applicationNumber = value; }
         public Funds Funds { get => funds; set => funds = value; }
 
-        public int CompareTo(IVisaApplication other)
-        {
-            throw new NotImplementedException();
-        }
-
         public override string ToString()
         {
             String applicationString = $"Application Number {applicationNumber}\n";
@@ -30,13 +25,9 @@ namespace FinalProjectSoftware.Classes
             return applicationString;
         }
 
-        /*
-         * needs to be implemented after IApplicant is done
-         * here I am comparing only main applicants as opposed to comparing all applicants in this application with all applicants in the other application
-        public int CompareTo(IApplication other)
+        public int CompareTo(IVisaApplication other)
         {
-            return getMainApplicant().CompareTo(other.getMainApplicant());
+            return applicant.CompareTo(other.Applicant);
         }
-        */
     }
 }
