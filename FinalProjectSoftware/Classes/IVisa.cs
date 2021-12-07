@@ -5,7 +5,7 @@ using System.Text;
 namespace FinalProjectSoftware.Classes
 {
     public delegate void VisaServicesDelegate();
-    interface IVisa : IComparable<IVisa>
+    interface IVisa : IComparable<IVisaApplication>
     {
         public DateTime ApplicationDate { get; set; }
         public DateTime ExpirationDate { get; set; }

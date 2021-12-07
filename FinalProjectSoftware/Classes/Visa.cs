@@ -4,35 +4,34 @@ using System.Text;
 
 namespace FinalProjectSoftware.Classes
 {
-    abstract class Visa
+    abstract class Visa : IVisa
     {
         private DateTime applicationDate;
         private DateTime expirationDate;
         private String uci;
         private String servicesProvided;
         private String visaType;
-        //Delegate Pending
-        //private VisaServicesDelegate servicesDelegate = null;
+
+        private VisaServicesDelegate servicesDelegate = null;
 
         public Visa()
         {
-            //setupVisaServicesDelegate();
+            setupVisaServicesDelegate();
         }
 
-        /*
         private void setupVisaServicesDelegate()
         {
             servicesDelegate += PayVisaFees;
             servicesDelegate += ConfirmAppointment;
             servicesDelegate += AssignConsul;
         }
-        */
 
         public DateTime ApplicationDate { get => applicationDate; set => applicationDate = value; }
         public DateTime ExpirationDate { get => expirationDate; set => expirationDate = value; }
         public string UCI { get => uci; set => uci = value; }
         public string ServicesProvided { get => servicesProvided; set => servicesProvided = value; }
         public string VisaType { get => visaType; set => visaType = value; }
+        public VisaServicesDelegate ServicesDelegate { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public String getInfoVisa()
         {
@@ -56,6 +55,10 @@ namespace FinalProjectSoftware.Classes
 
         public abstract void CallServicesProvided();
 
-        //Pending applying interfaces compare
+        public int CompareTo(IVisa other)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

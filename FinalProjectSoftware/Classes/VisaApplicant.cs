@@ -8,7 +8,7 @@ namespace FinalProjectSoftware.Classes
     {
         TouristVisa = 1, WorkVisa = 2, StudentVisa = 3
     }
-    class VisaApplicant
+    class VisaApplicant : IVisaApplicant
     {
         private String name;
         private uint age;
@@ -26,6 +26,11 @@ namespace FinalProjectSoftware.Classes
         public string Country { get => country; set => country = value; }
         public Visa Visa { get => visa; set => visa = value; }
         public short ChosenVisaType { get => chosenVisaType; set => chosenVisaType = value; }
+
+        public int CompareTo(IVisaApplicant other)
+        {
+            throw new NotImplementedException();
+        }
 
         public override string ToString()
         {

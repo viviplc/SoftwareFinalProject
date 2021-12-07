@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FinalProjectSoftware.Classes
 {
-    class VisaApplication
+    class VisaApplication : IVisaApplication
     {
         private VisaApplicant applicant;
         private String time;
@@ -17,6 +17,11 @@ namespace FinalProjectSoftware.Classes
         public VisaApplicant Applicant { get => applicant; set => applicant = value; }
         public int ApplicationNumber { get => applicationNumber; set => applicationNumber = value; }
         public Funds Funds { get => funds; set => funds = value; }
+
+        public int CompareTo(IVisaApplication other)
+        {
+            throw new NotImplementedException();
+        }
 
         public override string ToString()
         {
