@@ -26,6 +26,7 @@ namespace FinalProjectSoftware
             InitializeComponent();
         }
 
+
         private VisaApplicationList createVisaAppointments()
         {
             VisaApplicationList visaApplicationAppointments = new();

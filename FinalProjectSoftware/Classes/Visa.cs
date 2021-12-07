@@ -57,7 +57,7 @@ namespace FinalProjectSoftware.Classes
 
         public int CompareTo(IVisa other)
         {
-            throw new NotImplementedException();
+            return visaType.CompareTo(other.VisaType); 
         }
 
     }
