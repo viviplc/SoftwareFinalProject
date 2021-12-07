@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace FinalProjectSoftware.Classes
 {
@@ -29,8 +30,11 @@ namespace FinalProjectSoftware.Classes
         public DateTime ApplicationDate { get => applicationDate; set => applicationDate = value; }
         public DateTime ExpirationDate { get => expirationDate; set => expirationDate = value; }
         public string UCI { get => uci; set => uci = value; }
+        [XmlIgnore]
         public string ServicesProvided { get => servicesProvided; set => servicesProvided = value; }
+        [XmlIgnore]
         public string VisaType { get => visaType; set => visaType = value; }
+        [XmlIgnore]
         public VisaServicesDelegate ServicesDelegate { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public String getInfoVisa()
