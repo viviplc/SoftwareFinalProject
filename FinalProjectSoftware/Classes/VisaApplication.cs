@@ -20,9 +20,17 @@ namespace FinalProjectSoftware.Classes
 
         public override string ToString()
         {
-            String applicationString = $"Application Number {applicationNumber}\n";
-            applicationString += $"\t\t Time:  {time}, {applicant}, Visa Operations: {applicant.Visa.getInfoVisa()} \n";
-            return applicationString;
+            if (!isAvailable)
+            {
+                String applicationString = $"Application Number {applicationNumber}\n";
+                applicationString += $"\t\t Time:  {time}, {applicant}, Visa Operations: {applicant.Visa.getInfoVisa()} \n";
+                return applicationString;
+            }
+
+            return $"Hour:  {time}";
+
+            
+            
         }
 
         public int CompareTo(IVisaApplication other)
