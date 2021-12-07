@@ -111,20 +111,20 @@
         <StackPanel Orientation="Vertical"  Grid.Row="0" Grid.Column="1">
             <DataGrid Name="ApplicationsGrid" HorizontalAlignment="Left"  VerticalAlignment="Top"
                   Height="350" Margin="10,10,0,0" 
-                  AutoGenerateColumns="False">
+                  AutoGenerateColumns="False" ItemsSource="{Binding Path=TakenVisaApplicationAppointments}">
                 <DataGrid.RowStyle>
                     <Style TargetType="DataGridRow">
                         
                     </Style>
                 </DataGrid.RowStyle>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Hour" />
-                    <DataGridTextColumn Header="Name"/>
-                    <DataGridTextColumn Header="Age"/>
-                    <DataGridTextColumn Header="Birthday"/>
-                    <DataGridTextColumn Header="Country"/>
-                    <DataGridTextColumn Header="Passport"/>
-                    <DataGridTextColumn Header="Visa Type"/>
+                    <DataGridTextColumn Header="Hour" Binding="{Binding Time}" />
+                    <DataGridTextColumn Header="Name" Binding="{Binding Applicant.Name}"/>
+                    <DataGridTextColumn Header="Age" Binding="{Binding Applicant.Age}"/>
+                    <DataGridTextColumn Header="Birthday" Binding="{Binding Applicant.Birthday}"/>
+                    <DataGridTextColumn Header="Country" Binding="{Binding Applicant.Country}"/>
+                    <DataGridTextColumn Header="Passport" Binding="{Binding Applicant.Country}"/>
+                    <DataGridTextColumn Header="Visa Type" Binding="{Binding Applicant.Visa.VisaType}"/>
                 </DataGrid.Columns>
             </DataGrid>
             <ScrollViewer x:Name="ErrorScroll" Margin="10,5,0,0" Width="350" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" >
@@ -133,12 +133,12 @@
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
             <StackPanel Orientation="Horizontal" Margin="5">
-                <Button Name="btnSearchByName" Content="Search by Name" VerticalAlignment="Top"/>
+                <Button Name="btnSearchByName" Content="Search by Name" VerticalAlignment="Top" Click="btn_Search_Clicked"/>
                 <TextBox x:Name="TxtSearchQuery" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="5">
-                <Button Name="btnDisplay" Content="Display Data" VerticalAlignment="Top"/>
-                <Button Name="btnSaveData" Content="Save Information" VerticalAlignment="Top"/>
+                <Button Name="btnDisplay" Content="Display Data" VerticalAlignment="Top" Click="btnDisplayClicked"/>
+                <Button Name="btnSaveData" Content="Save Information" VerticalAlignment="Top" Click="btnSaveDataClicked"/>
             </StackPanel>
         </StackPanel>
 
