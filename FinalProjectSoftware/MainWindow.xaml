@@ -4,8 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FinalProjectSoftware"
+        xmlns:local1="clr-namespace:FinalProjectSoftware.Classes"
+        xmlns:local2="clr-namespace:FinalProjectSoftware.Rules"
         mc:Ignorable="d"
-        Title="MainWindow" Height="550" Width="850">
+        DataContext="local:VisaApplicationCenter"
+        Title="Visa Application Center" Height="550" Width="850">
+    <Window.Resources>
+        <local1:VisaApplicant x:Key="applicant"/>
+    </Window.Resources>
     <Grid>
         <Grid.Resources>
             <Style TargetType="Label">
@@ -56,17 +62,37 @@
         <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0" Margin="10,10,10,5">
             <Label Content="Select a slot" HorizontalAlignment="Left" VerticalAlignment="Top" />
             <Border x:Name="BorderSlotSelector" HorizontalAlignment="Left"  VerticalAlignment="Top" BorderThickness="1" Margin="2">
-                <ComboBox x:Name="CBSlotSelector" HorizontalAlignment="Left" VerticalAlignment="Top" DisplayMemberPath="Time"/>
+                <ComboBox x:Name="CBSlotSelector" HorizontalAlignment="Left" VerticalAlignment="Top" DisplayMemberPath="Time" ItemsSource="{Binding Path=AvailableVisaApplicationAppointments}"/>
             </Border>
             <Label Content="Applicant Name" HorizontalAlignment="Left" VerticalAlignment="Top" />
-            <TextBox x:Name="TxtApplicantName" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top">
-
+            <TextBox DataContext="{StaticResource applicant}"
+                     x:Name="TxtApplicantName" 
+                     HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"
+                     ToolTip="{Binding ElementName=TxtApplicantName,
+                       Path=(Validation.Errors)[0].ErrorContent}">
+                <TextBox.Text>
+                    <Binding Path="Name" NotifyOnValidationError="False">
+                        <Binding.ValidationRules>
+                            <local2:ApplicantNameRule Min="1" Max="100"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
             </TextBox>
             <Label Content="Applicant Brithday" HorizontalAlignment="Left" VerticalAlignment="Top" />
             <DatePicker DisplayDate="2021-12-06" />
             <Label Content="Applicant Passport" HorizontalAlignment="Left" VerticalAlignment="Top" />
-            <TextBox x:Name="TxtApplicantPassport" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top">
-
+            <TextBox DataContext="{StaticResource applicant}"
+                     x:Name="TxtApplicantPassport" 
+                     HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"
+                     ToolTip="{Binding ElementName=TxtApplicantPassport,
+                       Path=(Validation.Errors)[0].ErrorContent}">
+                <TextBox.Text>
+                    <Binding Path="PassportNumber" NotifyOnValidationError="False">
+                        <Binding.ValidationRules>
+                            <local2:ApplicantPassportRule Min="7" Max="9"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
             </TextBox>
             <Label Content="Applicant Country" HorizontalAlignment="Left" VerticalAlignment="Top" />
             <Border x:Name="BorderCountrySelector" HorizontalAlignment="Left"  VerticalAlignment="Top" BorderThickness="1" Margin="2">

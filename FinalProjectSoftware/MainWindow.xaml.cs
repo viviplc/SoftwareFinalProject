@@ -27,11 +27,33 @@ namespace FinalProjectSoftware
         VisaApplicationCenter visaApplicationCenter = new();
         public MainWindow()
         {
+            InitializeComponent();
             visaApplicationCenter.VisaApplicationAppointments = createVisaAppointments();
             refreshAvailableVisaAppointmentSlots();
+
+
             InitializeComponent();
+            DataContext = visaApplicationCenter;
+
+            Validation.AddErrorHandler(this.TxtApplicantName,
+                TxtApplicantName_ValidationError);
+            Validation.AddErrorHandler(this.TxtApplicantPassport,
+                TxtApplicantPassport_ValidationError);
+
+            
+
         }
 
+        protected void TxtApplicantPassport_ValidationError(object sender,
+            ValidationErrorEventArgs e)
+        {
+            MessageBox.Show((string)e.Error.ErrorContent);
+        }
+        protected void TxtApplicantName_ValidationError(object sender,
+            ValidationErrorEventArgs e)
+        {
+            MessageBox.Show((string)e.Error.ErrorContent);
+        }
 
         private VisaApplicationList createVisaAppointments()
         {
