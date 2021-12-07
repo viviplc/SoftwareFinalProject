@@ -1,70 +1,67 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace FinalProjectSoftware.Classes
 {
     class VisaApplicationList : IEnumerable<VisaApplication>
     {
-        private List<VisaApplication> applicationList = null;
+        private ObservableCollection<VisaApplication> applicationList = null;
 
         public VisaApplicationList()
         {
-            applicationList = new List<VisaApplication>();
+            ApplicationList = new ObservableCollection<VisaApplication>();
         }
 
         //indexer
         public VisaApplication this[int index]
         {
-            get => applicationList[index];
-            set => applicationList[index] = value;
+            get => ApplicationList[index];
+            set => ApplicationList[index] = value;
         }
 
         //Add method 
         public void Add(VisaApplication newApplication)
         {
-            applicationList.Add(newApplication);
+            ApplicationList.Add(newApplication);
         }
 
         //Count method
         public int Count
         {
-            get => applicationList.Count;
+            get => ApplicationList.Count;
         }
+        public ObservableCollection<VisaApplication> ApplicationList { get => applicationList; set => applicationList = value; }
 
         //RemoveAt method
         public void RemoveAt(int index)
         {
-            applicationList.RemoveAt(index);
+            ApplicationList.RemoveAt(index);
         }
 
         //Remove method
         public void Remove(VisaApplication application)
         {
-            applicationList.Remove(application);
-        }
-
-        public void Sort()
-        {
-            applicationList.Sort();
+            ApplicationList.Remove(application);
         }
 
         public IEnumerator<VisaApplication> GetEnumerator()
         {
-            return ((IEnumerable<VisaApplication>)applicationList).GetEnumerator();
+            return ((IEnumerable<VisaApplication>)ApplicationList).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return ((IEnumerable<VisaApplication>)applicationList).GetEnumerator();
+            return ((IEnumerable<VisaApplication>)ApplicationList).GetEnumerator();
         }
 
         public int getApplicationIndexFromTime(String time)
         {
-            for (int i = 0; i < applicationList.Count; i++)
+            for (int i = 0; i < ApplicationList.Count; i++)
             {
-                if (applicationList[i].Time == time)
+                if (ApplicationList[i].Time == time)
                 {
                     return i;
                 }
