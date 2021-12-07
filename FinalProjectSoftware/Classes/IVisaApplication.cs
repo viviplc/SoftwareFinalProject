@@ -9,7 +9,7 @@ namespace FinalProjectSoftware.Classes
         public VisaApplicant Applicant { get; set; }
         public String Time { get; set; }
         public Boolean IsAvailable { get; set; }
-        public int ApplicationNumber { get; set; }
+        public String UCI { get; set; }
         public Funds Funds { get; set; }
         public string ToString();
     }

@@ -132,6 +132,7 @@
                     </Style>
                 </DataGrid.RowStyle>
                 <DataGrid.Columns>
+                    <DataGridTextColumn Header="UCI" Binding="{Binding UCI}" />
                     <DataGridTextColumn Header="Hour" Binding="{Binding Time}" />
                     <DataGridTextColumn Header="Name" Binding="{Binding Applicant.Name}"/>
                     <DataGridTextColumn Header="Age" Binding="{Binding Applicant.Age}"/>

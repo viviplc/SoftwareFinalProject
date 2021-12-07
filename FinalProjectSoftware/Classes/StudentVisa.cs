@@ -6,8 +6,15 @@ namespace FinalProjectSoftware.Classes
 {
     class StudentVisa : Visa
     {
+        private static int UCI = 0;
+        private int uciId = 0;
+
+        public int UciId { get => uciId;}
+
         public StudentVisa()
         {
+            UCI++;
+            this.uciId = UCI;
         }
 
         public override void CallServicesProvided()
@@ -39,5 +46,9 @@ namespace FinalProjectSoftware.Classes
             ServicesProvided += "... Previous Education Transcript Provided ...\n";
         }
 
+        public override int getUCIId()
+        {
+            return this.uciId;
+        }
     }
 }

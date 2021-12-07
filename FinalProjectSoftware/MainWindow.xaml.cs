@@ -33,7 +33,7 @@ namespace FinalProjectSoftware
             visaApplicationCenter.VisaApplicationAppointments = createVisaAppointments();
             refreshAvailableVisaAppointmentSlots();
 
-
+            CBCountrySelector.Items.Add("Colombia");
             InitializeComponent();
             DataContext = visaApplicationCenter;
 
@@ -205,16 +205,126 @@ namespace FinalProjectSoftware
             LblErrorMessages.Text = "";
 
             int slotSelectedIndex = CBSlotSelector.SelectedIndex;
+            String slotSelected = CBSlotSelector.Text;
             String name = TxtApplicantName.Text;
             String birthday = PckBirthday.Text;
             String passport = TxtApplicantPassport.Text;
             String phoneString = TxtApplicantPhone.Text;
             int countryIndex = CBCountrySelector.SelectedIndex;
+            String country = CBCountrySelector.Text;
 
-            if (validateInput(slotSelectedIndex,name,birthday,passport,phoneString, countryIndex)) { 
+            uint phone = 0;
+
+            if (validateInput(slotSelectedIndex,name,birthday,passport,phoneString, countryIndex)) 
+            {
                 //logic for validation successfull
+                if (uint.TryParse(phoneString, out phone)) 
+                {
+                    //defining the visa type
+                    Visas selectedVisa = new Visas();
+                    if (RBWorkVisa.IsChecked == true)
+                    {
+                        selectedVisa = Visas.WorkVisa;
+                    }
+                    else if (RBStudentVisa.IsChecked == true)
+                    {
+                        selectedVisa = Visas.StudentVisa;
+                    }
+                    else if (RBTourismVisa.IsChecked == true)
+                    {
+                        selectedVisa = Visas.TourismVisa;
+                    }
+
+                    int visaApplicationIndex = visaApplicationCenter.VisaApplicationAppointments.getApplicationIndexFromTime(slotSelected);
+                    VisaApplication application = visaApplicationCenter.VisaApplicationAppointments[visaApplicationIndex];
+                    VisaApplicant applicant = new();
+                    applicant.Name = name;
+                    applicant.Age = calculateApplicantAge(birthday);
+                    applicant.PassportNumber = passport;
+                    applicant.Birthday = birthday;
+                    applicant.Phone = phone;
+                    applicant.Country = country;
+
+                    Visa visa = null;
+                    int expirationRange = 0;
+                    String uci = "";
+
+                    switch (selectedVisa)
+                    {
+                        case Visas.WorkVisa:
+                            visa = new WorkVisa();
+                            visa.VisaType = "Work Visa";
+                            expirationRange = 5;
+                            uci = $"WK-{visa.getUCIId()}";
+                            break;
+                        case Visas.StudentVisa:
+                            visa = new StudentVisa();
+                            visa.VisaType = "Student Visa";
+                            expirationRange = 2;
+                            uci = $"ST-{visa.getUCIId()}";
+                            break;
+                        case Visas.TourismVisa:
+                            visa = new TouristVisa();
+                            visa.VisaType = "Tourist Visa";
+                            expirationRange = 10;
+                            uci = $"TO-{visa.getUCIId()}";
+                            break;
+                        default:
+                            break;
+                    }
+
+                    DateTime today = DateTime.Now;
+                    visa.ApplicationDate = today;
+                    visa.ExpirationDate = today.AddYears(expirationRange);
+                    applicant.Visa = visa;
+                    application.Applicant = applicant;
+                    application.UCI = uci;
+                    application.IsAvailable = false;
+                    /*
+                     * 
+                     * application.funds = funds; missing read from view
+                     *
+                     *
+                     */
+                    application.Applicant.Visa.ServicesDelegate();
+
+                    refreshAvailableVisaAppointmentSlots();
+                    refreshTakenVisaAppointmentSlots();
+
+                    //missing sorting
+
+                    resetUserInput();
+                }
             }
 
+        }
+
+        private void resetUserInput()
+        {
+            BorderVisaTypeSelector.BorderBrush = Brushes.Transparent;
+            BorderSlotSelector.BorderBrush = Brushes.Transparent;
+            BorderCountrySelector.BorderBrush = Brushes.Transparent;
+            CBSlotSelector.SelectedIndex = -1;
+            TxtApplicantName.Text="";
+            PckBirthday.Text="";
+            TxtApplicantPassport.Text = "";
+            TxtApplicantPhone.Text = "";
+            CBCountrySelector.SelectedIndex = -1;
+            LblErrorMessages.Text = "";
+            RBStudentVisa.IsChecked = false;
+            RBWorkVisa.IsChecked = false;
+            RBTourismVisa.IsChecked = false;
+            ErrorScroll.Visibility = Visibility.Hidden;
+
+        }
+
+        private uint calculateApplicantAge(string birthday)
+        {
+            uint age = 0;
+            DateTime birthDate = DateTime.Parse(birthday);
+            age = (uint)DateTime.Now.Subtract(birthDate).Days;
+            age = age/365;   
+            return age;
         }
 
         private bool validateInput(int slotSelectedIndex, string name, string birthday, string passport, string phoneString, int countryIndex)

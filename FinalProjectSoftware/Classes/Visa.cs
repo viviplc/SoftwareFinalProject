@@ -9,7 +9,6 @@ namespace FinalProjectSoftware.Classes
     {
         private DateTime applicationDate;
         private DateTime expirationDate;
-        private String uci;
         private String servicesProvided;
         private String visaType;
 
@@ -29,13 +28,12 @@ namespace FinalProjectSoftware.Classes
 
         public DateTime ApplicationDate { get => applicationDate; set => applicationDate = value; }
         public DateTime ExpirationDate { get => expirationDate; set => expirationDate = value; }
-        public string UCI { get => uci; set => uci = value; }
         [XmlIgnore]
         public string ServicesProvided { get => servicesProvided; set => servicesProvided = value; }
         [XmlIgnore]
         public string VisaType { get => visaType; set => visaType = value; }
         [XmlIgnore]
-        public VisaServicesDelegate ServicesDelegate { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public VisaServicesDelegate ServicesDelegate { get => servicesDelegate; set => servicesDelegate=value; }
 
         public String getInfoVisa()
         {
@@ -64,5 +62,6 @@ namespace FinalProjectSoftware.Classes
             return visaType.CompareTo(other.VisaType); 
         }
 
+        public abstract int getUCIId();
     }
 }
