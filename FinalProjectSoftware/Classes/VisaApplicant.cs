@@ -18,7 +18,6 @@ namespace FinalProjectSoftware.Classes
         private String country;
         private Visa visa;
         private short chosenVisaType;
-        // Romeno - Do we need credit card info as well?
 
         public string Name { get => name; set => name = value; }
         public uint Age { get => age; set => age = value; }
