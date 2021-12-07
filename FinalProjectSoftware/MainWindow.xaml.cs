@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml.Serialization;
 using System.IO;
+using System.Data;
 
 namespace FinalProjectSoftware
 {
@@ -291,7 +292,17 @@ namespace FinalProjectSoftware
 
             return passValidation;
         }
+        private void btnDeleteRowClicked(object sender, RoutedEventArgs e)
+        {
+            /*DataRowView row = (DataRowView)ApplicationsGrid.SelectedItem;
+            visaApplicationCenter.TakenVisaApplicationAppointments.RemoveAt(row.Row);
+            */
+            var currentRowIndex = ApplicationsGrid.Items.IndexOf(ApplicationsGrid.CurrentItem);
+            visaApplicationCenter.TakenVisaApplicationAppointments.RemoveAt(currentRowIndex);
+            refreshAppointmentSlotsFromTakenSlots();
+        }
     }
 
-    
+   
+
 }

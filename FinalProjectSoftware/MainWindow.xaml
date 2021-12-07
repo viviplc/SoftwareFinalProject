@@ -140,6 +140,22 @@
                     <DataGridTextColumn Header="Passport" Binding="{Binding Applicant.PassportNumber}"/>
                     <DataGridTextColumn Header="Phone" Binding="{Binding Applicant.PhoneString}"/>
                     <DataGridTextColumn Header="Visa Type" Binding="{Binding Applicant.Visa.VisaType}"/>
+                    <DataGridTemplateColumn >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Delete"
+                            Click="btnDeleteRowClicked"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Update"
+                            Click="btnUpdateRowClicked"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
             <ScrollViewer x:Name="ErrorScroll" Margin="10,5,0,0" Width="350" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Hidden" >
