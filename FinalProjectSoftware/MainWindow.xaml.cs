@@ -88,7 +88,7 @@ namespace FinalProjectSoftware
             }
             catch (Exception e)
             {
-                MessageBox.Show("File can not be saved");
+                MessageBox.Show("File can not be saved" + e);
             }
             finally
             {
@@ -106,7 +106,7 @@ namespace FinalProjectSoftware
             }
             catch (Exception e)
             {
-                MessageBox.Show("File can not be reach");
+                MessageBox.Show("File can not be reach:" + e);
             }
             finally
             {
