@@ -59,5 +59,17 @@ namespace FinalProjectSoftware.Classes
         {
             return ((IEnumerable<VisaApplication>)applicationList).GetEnumerator();
         }
+
+        public int getApplicationIndexFromTime(String time)
+        {
+            for (int i = 0; i < applicationList.Count; i++)
+            {
+                if (applicationList[i].Time == time)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
     }
 }

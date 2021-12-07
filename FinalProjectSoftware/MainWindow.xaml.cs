@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace FinalProjectSoftware
 {
@@ -73,6 +75,64 @@ namespace FinalProjectSoftware
             }
             visaApplicationCenter.TakenVisaApplicationAppointments = newAppointmentSlots;
             //AppointmentsGrid.ItemsSource = studio.TakenAppointments;
+        }
+
+        private void WriteXMLFile()
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(VisaApplicationList));
+            TextWriter writter = new StreamWriter("appointments.xml");
+            try
+            {
+                serializer.Serialize(writter, visaApplicationCenter.TakenVisaApplicationAppointments);
+                MessageBox.Show("File saved successfully");
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("File can not be saved");
+            }
+            finally
+            {
+                writter.Close();
+            }
+        }
+        private void ReadXMLFile()
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(VisaApplicationList));
+            TextReader reader = new StreamReader("appointments.xml");
+            try
+            {
+                visaApplicationCenter.TakenVisaApplicationAppointments = (VisaApplicationList)serializer.Deserialize(reader);
+                refreshAppointmentSlotsFromTakenSlots();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("File can not be reach");
+            }
+            finally
+            {
+                reader.Close();
+            }
+        }
+
+        private void refreshAppointmentSlotsFromTakenSlots()
+        {
+            VisaApplicationList allAppointments = createVisaAppointments();
+            VisaApplicationList availableAppointments = new();
+            int curIndex = 0;
+            foreach (VisaApplication appointment in allAppointments)
+            {
+                var indexInTakenAppointments = visaApplicationCenter.TakenVisaApplicationAppointments.getApplicationIndexFromTime(appointment.Time);
+                if (indexInTakenAppointments >= 0)
+                {
+                    allAppointments[curIndex] = visaApplicationCenter.TakenVisaApplicationAppointments[indexInTakenAppointments];
+                } else
+                {
+                    availableAppointments.Add(appointment);
+                }
+                curIndex += 1;
+            }
+            visaApplicationCenter.VisaApplicationAppointments = allAppointments;
+            visaApplicationCenter.AvailableVisaApplicationAppointments = availableAppointments;
         }
     }
 
