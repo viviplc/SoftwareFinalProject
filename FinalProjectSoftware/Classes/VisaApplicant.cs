@@ -14,6 +14,7 @@ namespace FinalProjectSoftware.Classes
         private uint age;
         private String passportNumber;
         private String birthday;
+        private uint phone;
         private String country;
         private Visa visa;
         private short chosenVisaType;
@@ -26,11 +27,13 @@ namespace FinalProjectSoftware.Classes
         public string Country { get => country; set => country = value; }
         public Visa Visa { get => visa; set => visa = value; }
         public short ChosenVisaType { get => chosenVisaType; set => chosenVisaType = value; }
+        public uint Phone { get => phone; set => phone = value; }
 
+        public string PhoneString { get { return Phone.ToString(); } }
 
         public override string ToString()
         {
-            return $"Name:  {name}, Age: {age}, Passport Number: {passportNumber}, Birthday: {Birthday}, Country: {Country}";
+            return $"Name:  {name}, Age: {age}, Passport Number: {passportNumber}, Phone: {phone}, Birthday: {Birthday}, Country: {Country}";
         }
 
         public int CompareTo(IVisaApplicant other)
