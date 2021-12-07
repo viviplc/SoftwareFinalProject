@@ -25,6 +25,7 @@ namespace FinalProjectSoftware
     {
 
         VisaApplicationCenter visaApplicationCenter = new();
+
         public MainWindow()
         {
             InitializeComponent();
