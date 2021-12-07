@@ -21,8 +21,12 @@ namespace FinalProjectSoftware
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        VisaApplicationCenter visaApplicationCenter = new();
         public MainWindow()
         {
+            visaApplicationCenter.VisaApplicationAppointments = createVisaAppointments();
+            refreshAvailableVisaAppointmentSlots();
             InitializeComponent();
         }
 
@@ -41,6 +45,34 @@ namespace FinalProjectSoftware
                 startTime = startTime.AddMinutes(30);
             }
             return visaApplicationAppointments;
+        }
+
+        private void refreshAvailableVisaAppointmentSlots()
+        {
+            VisaApplicationList newAppointmentSlots = new();
+            foreach (VisaApplication appointment in visaApplicationCenter.VisaApplicationAppointments)
+            {
+                if (appointment.IsAvailable)
+                {
+                    newAppointmentSlots.Add(appointment);
+                }
+            }
+            visaApplicationCenter.AvailableVisaApplicationAppointments = newAppointmentSlots;
+
+        }
+
+        private void refreshTakenVisaAppointmentSlots()
+        {
+            VisaApplicationList newAppointmentSlots = new();
+            foreach (VisaApplication appointment in visaApplicationCenter.VisaApplicationAppointments)
+            {
+                if (!appointment.IsAvailable)
+                {
+                    newAppointmentSlots.Add(appointment);
+                }
+            }
+            visaApplicationCenter.TakenVisaApplicationAppointments = newAppointmentSlots;
+            //AppointmentsGrid.ItemsSource = studio.TakenAppointments;
         }
     }
 
