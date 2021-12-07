@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FinalProjectSoftware.Classes
 {
-    interface IVisaApplication : IComparable<IVisaApplication>
+    public interface IVisaApplication : IComparable<IVisaApplication>
     {
         public VisaApplicant Applicant { get; set; }
         public String Time { get; set; }

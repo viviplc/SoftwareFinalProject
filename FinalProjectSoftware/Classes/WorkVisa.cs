@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FinalProjectSoftware.Classes
 {
-    class WorkVisa : Visa
+    public class WorkVisa : Visa
     {
         private static int UCI = 0;
         private int uciId = 0;

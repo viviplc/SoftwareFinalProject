@@ -133,6 +133,8 @@ namespace FinalProjectSoftware
             {
                 visaApplicationCenter.TakenVisaApplicationAppointments = (VisaApplicationList)serializer.Deserialize(reader);
                 refreshAppointmentSlotsFromTakenSlots();
+                refreshAvailableVisaAppointmentSlots();
+                refreshTakenVisaAppointmentSlots();
             }
             catch (Exception e)
             {
@@ -146,23 +148,17 @@ namespace FinalProjectSoftware
 
         private void refreshAppointmentSlotsFromTakenSlots()
         {
-            VisaApplicationList allAppointments = createVisaAppointments();
-            VisaApplicationList availableAppointments = new();
+            //VisaApplicationList allAppointments = createVisaAppointments();
+            //VisaApplicationList availableAppointments = new();
             int curIndex = 0;
-            foreach (VisaApplication appointment in allAppointments)
+            foreach (VisaApplication appointment in visaApplicationCenter.TakenVisaApplicationAppointments)
             {
-                var indexInTakenAppointments = visaApplicationCenter.TakenVisaApplicationAppointments.getApplicationIndexFromTime(appointment.Time);
-                if (indexInTakenAppointments >= 0)
-                {
-                    allAppointments[curIndex] = visaApplicationCenter.TakenVisaApplicationAppointments[indexInTakenAppointments];
-                } else
-                {
-                    availableAppointments.Add(appointment);
-                }
+                var indexInAllAppointments = visaApplicationCenter.VisaApplicationAppointments.getApplicationIndexFromTime(appointment.Time);
+                visaApplicationCenter.VisaApplicationAppointments[indexInAllAppointments] = appointment;
                 curIndex += 1;
             }
-            visaApplicationCenter.VisaApplicationAppointments = allAppointments;
-            visaApplicationCenter.AvailableVisaApplicationAppointments = availableAppointments;
+           // visaApplicationCenter.VisaApplicationAppointments = allAppointments;
+            //visaApplicationCenter.AvailableVisaApplicationAppointments = availableAppointments;
         }
 
         private void btn_Search_Clicked(object sender, RoutedEventArgs e)
@@ -403,12 +399,12 @@ namespace FinalProjectSoftware
         }
         private void btnDeleteRowClicked(object sender, RoutedEventArgs e)
         {
-            /*DataRowView row = (DataRowView)ApplicationsGrid.SelectedItem;
-            visaApplicationCenter.TakenVisaApplicationAppointments.RemoveAt(row.Row);
-            */
             var currentRowIndex = ApplicationsGrid.Items.IndexOf(ApplicationsGrid.CurrentItem);
-            visaApplicationCenter.TakenVisaApplicationAppointments.RemoveAt(currentRowIndex);
-            refreshAppointmentSlotsFromTakenSlots();
+            var curRowTime = visaApplicationCenter.TakenVisaApplicationAppointments[currentRowIndex].Time;
+            var indexInAllApointments = visaApplicationCenter.VisaApplicationAppointments.getApplicationIndexFromTime(curRowTime);
+            visaApplicationCenter.VisaApplicationAppointments[indexInAllApointments].IsAvailable = true;
+            refreshTakenVisaAppointmentSlots();
+            refreshAvailableVisaAppointmentSlots();
         }
     }
 

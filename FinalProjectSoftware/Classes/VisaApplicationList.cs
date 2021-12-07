@@ -11,7 +11,8 @@ namespace FinalProjectSoftware.Classes
     [XmlInclude(typeof(StudentVisa))]
     [XmlInclude(typeof(WorkVisa))]
     [XmlInclude(typeof(TouristVisa))]
-    class VisaApplicationList : IEnumerable<VisaApplication>
+    
+    public class VisaApplicationList : IEnumerable<VisaApplication>
     {
         private ObservableCollection<VisaApplication> applicationList = null;
 

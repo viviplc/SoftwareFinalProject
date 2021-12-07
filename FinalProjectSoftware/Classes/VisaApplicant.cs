@@ -8,7 +8,7 @@ namespace FinalProjectSoftware.Classes
     {
         TouristVisa = 1, WorkVisa = 2, StudentVisa = 3
     }
-    class VisaApplicant : IVisaApplicant
+    public class VisaApplicant : IVisaApplicant
     {
         private String name;
         private uint age;

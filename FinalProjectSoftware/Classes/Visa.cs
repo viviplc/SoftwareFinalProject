@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 
 namespace FinalProjectSoftware.Classes
 {
-    abstract class Visa : IVisa
+    public abstract class Visa : IVisa
     {
         private DateTime applicationDate;
         private DateTime expirationDate;
@@ -30,7 +30,7 @@ namespace FinalProjectSoftware.Classes
         public DateTime ExpirationDate { get => expirationDate; set => expirationDate = value; }
         [XmlIgnore]
         public string ServicesProvided { get => servicesProvided; set => servicesProvided = value; }
-        [XmlIgnore]
+        
         public string VisaType { get => visaType; set => visaType = value; }
         [XmlIgnore]
         public VisaServicesDelegate ServicesDelegate { get => servicesDelegate; set => servicesDelegate=value; }
