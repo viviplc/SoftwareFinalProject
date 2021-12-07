@@ -33,7 +33,6 @@ namespace FinalProjectSoftware
             visaApplicationCenter.VisaApplicationAppointments = createVisaAppointments();
             refreshAvailableVisaAppointmentSlots();
 
-            CBCountrySelector.Items.Add("Colombia");
             InitializeComponent();
             DataContext = visaApplicationCenter;
 

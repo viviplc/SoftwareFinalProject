@@ -141,6 +141,7 @@
                     <DataGridTextColumn Header="Passport" Binding="{Binding Applicant.PassportNumber}"/>
                     <DataGridTextColumn Header="Phone" Binding="{Binding Applicant.PhoneString}"/>
                     <DataGridTextColumn Header="Visa Type" Binding="{Binding Applicant.Visa.VisaType}"/>
+                    <DataGridTextColumn Header="Expiration Date" Binding="{Binding Applicant.Visa.ExpirationDate}"/>
                     <DataGridTemplateColumn >
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -153,7 +154,7 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Content="Update"
-                            Click="btnUpdateRowClicked"/>
+                            />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
