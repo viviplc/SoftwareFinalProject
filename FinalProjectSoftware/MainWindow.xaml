@@ -12,6 +12,7 @@
         Title="Visa Application Center" Height="550" Width="850">
     <Window.Resources>
         <local1:VisaApplicant x:Key="applicant"/>
+        <local1:VisaApplication x:Key="application"/>
         <local3:AgeConverter x:Key="ageConverter"/>
     </Window.Resources>
     <Grid>
@@ -27,6 +28,12 @@
                 <Setter Property="Width" Value="150"/>
                 <Setter Property="FontSize" Value="10"/>
                 <Setter Property="Margin" Value="2"/>
+            </Style>
+            <Style TargetType="CheckBox">
+                <Setter Property="Height" Value="15"/>
+                <Setter Property="Width" Value="150"/>
+                <Setter Property="FontSize" Value="10"/>
+                <Setter Property="Margin" Value="1"/>
             </Style>
             <Style TargetType="DatePicker">
                 <Setter Property="Text" Value=""/>
@@ -113,6 +120,12 @@
                     </Binding>
                 </TextBox.Text>
             </TextBox>
+            <Label Content="Applicant Founds" HorizontalAlignment="Left" VerticalAlignment="Top" />
+            <TextBox DataContext="{StaticResource application}"
+                     x:Name="TxtApplicantFounds" 
+                     HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top">
+            </TextBox>
+            <CheckBox x:Name="CheckSponsor" Content="Sponsor Funds" />
             <Label Content="Applicant Country" HorizontalAlignment="Left" VerticalAlignment="Top" />
             <Border x:Name="BorderCountrySelector" HorizontalAlignment="Left"  VerticalAlignment="Top" BorderThickness="1" Margin="2">
                 <ComboBox x:Name="CBCountrySelector" HorizontalAlignment="Left" VerticalAlignment="Top" ItemsSource="{Binding Path=CountryList}"/>
@@ -137,11 +150,11 @@
                     </Style>
                 </DataGrid.RowStyle>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="UCI" Binding="{Binding UCI}" />
                     <DataGridTextColumn Header="Hour" Binding="{Binding Time}" />
+                    <DataGridTextColumn Header="UCI" Binding="{Binding UCI}" />
                     <DataGridTextColumn Header="Name" Binding="{Binding Applicant.Name}"/>
                     <DataGridTextColumn Header="Age" Binding="{Binding Applicant.Age}"/>
-                    <DataGridTextColumn Header="Birthday" Binding="{Binding Applicant.Birthday}"/>
+                    <DataGridTextColumn Header="Funds" Binding="{Binding Funds.Amount}"/>
                     <DataGridTextColumn Header="Country" Binding="{Binding Applicant.Country}"/>
                     <DataGridTextColumn Header="Passport" Binding="{Binding Applicant.PassportNumber}"/>
                     <DataGridTextColumn Header="Phone" Binding="{Binding Applicant.PhoneString}"/>

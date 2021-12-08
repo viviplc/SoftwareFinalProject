@@ -207,16 +207,19 @@ namespace FinalProjectSoftware
             String birthday = PckBirthday.Text;
             String passport = TxtApplicantPassport.Text;
             String phoneString = TxtApplicantPhone.Text;
+            String fundsString = TxtApplicantFounds.Text;
+            bool fundsSponsor = (bool)CheckSponsor.IsChecked;
             int countryIndex = CBCountrySelector.SelectedIndex;
             String country = CBCountrySelector.Text;
 
             uint phone = 0;
+            double funds = 0.0;
 
-            if (validateInput(slotSelectedIndex,name,birthday,passport,phoneString, countryIndex)) 
+            if (validateInput(slotSelectedIndex,name,birthday,passport,phoneString, fundsString ,countryIndex)) 
             {
                 refreshGridSource();
                 //logic for validation successfull
-                if (uint.TryParse(phoneString, out phone)) 
+                if (uint.TryParse(phoneString, out phone) && double.TryParse(fundsString, out funds))
                 {
                     //defining the visa type
                     Visas selectedVisa = new Visas();
@@ -278,18 +281,14 @@ namespace FinalProjectSoftware
                     application.Applicant = applicant;
                     application.UCI = uci;
                     application.IsAvailable = false;
-                    /*
-                     * 
-                     * application.funds = funds; missing read from view
-                     *
-                     *
-                     */
+                    Funds newFunds = new();
+                    newFunds.Amount = funds;
+                    newFunds.FromSponsor = fundsSponsor;
+                    application.Funds = newFunds;
                     application.Applicant.Visa.ServicesDelegate();
 
                     refreshAvailableVisaAppointmentSlots();
                     refreshTakenVisaAppointmentSlots();
-
-                    //missing sorting
 
                     resetUserInput();
                     refreshGridSource();
@@ -327,12 +326,13 @@ namespace FinalProjectSoftware
             return age;
         }
 
-        private bool validateInput(int slotSelectedIndex, string name, string birthday, string passport, string phoneString, int countryIndex)
+        private bool validateInput(int slotSelectedIndex, string name, string birthday, string passport, string phoneString, string fundsString, int countryIndex)
         {
             bool passValidation = true;
             string validation = "";
 
             uint phone = 0;
+            double funds = 0.0;
 
             //Time Slot selection validation
             if (slotSelectedIndex < 0)
@@ -376,11 +376,18 @@ namespace FinalProjectSoftware
                 validation += "Invalid passport \n";
             }
 
-            //Passport Validation
+            //Phone Validation
             if (phoneString.Length != 10 || !uint.TryParse(phoneString, out phone))
             {
                 passValidation = false;
                 validation += "Invalid phone \n";
+            }
+
+            //funds Validation
+            if (!double.TryParse(fundsString, out funds))
+            {
+                passValidation = false;
+                validation += "Invalid funds \n";
             }
 
             //country validation
