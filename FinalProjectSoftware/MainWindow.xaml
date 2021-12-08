@@ -145,8 +145,10 @@
                     <DataGridTemplateColumn >
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="Delete"
-                            Click="btnDeleteRowClicked" Width="55"/>
+                                <Button 
+                            Click="btnDeleteRowClicked" Width="25">
+                                    <Image Source="../Icons/bin.png" Width="20" Height="20"/>
+                                </Button>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
