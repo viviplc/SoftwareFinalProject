@@ -290,6 +290,7 @@ namespace FinalProjectSoftware
                     //missing sorting
 
                     resetUserInput();
+                    refreshGridSource();
                 }
             }
 
