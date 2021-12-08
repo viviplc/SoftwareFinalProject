@@ -5,13 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Collections.ObjectModel;
+using System.Xml.Serialization;
 
 namespace FinalProjectSoftware.Classes
 {
+   
     class VisaApplicationCenter: INotifyPropertyChanged
     {
+
         private VisaApplicationList visaApplicationAppointments;
         private VisaApplicationList availableVisaApplicationAppointments;
+        
         private VisaApplicationList takenVisaApplicationAppointments;
         private string[] countryList;
 

@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using System.Xml.Serialization;
 using System.IO;
 using System.Data;
+using System.Collections.ObjectModel;
 
 namespace FinalProjectSoftware
 {
@@ -160,7 +161,8 @@ namespace FinalProjectSoftware
             int curIndex = 0;
             foreach (VisaApplication appointment in visaApplicationCenter.TakenVisaApplicationAppointments)
             {
-                var indexInAllAppointments = visaApplicationCenter.VisaApplicationAppointments.getApplicationIndexFromTime(appointment.Time);
+                //var indexInAllAppointments = visaApplicationCenter.VisaApplicationAppointments.getApplicationIndexFromTime(appointment.Time);
+                var indexInAllAppointments = getApplicationIndexFromTime(visaApplicationCenter.VisaApplicationAppointments,appointment.Time);
                 visaApplicationCenter.VisaApplicationAppointments[indexInAllAppointments] = appointment;
                 curIndex += 1;
             }
@@ -246,7 +248,8 @@ namespace FinalProjectSoftware
                         selectedVisa = Visas.TourismVisa;
                     }
 
-                    int visaApplicationIndex = visaApplicationCenter.VisaApplicationAppointments.getApplicationIndexFromTime(slotSelected);
+                    //int visaApplicationIndex = visaApplicationCenter.VisaApplicationAppointments.getApplicationIndexFromTime(slotSelected);
+                    int visaApplicationIndex = getApplicationIndexFromTime(visaApplicationCenter.VisaApplicationAppointments,slotSelected);
                     VisaApplication application = visaApplicationCenter.VisaApplicationAppointments[visaApplicationIndex];
                     VisaApplicant applicant = new();
                     applicant.Name = name;
@@ -427,7 +430,8 @@ namespace FinalProjectSoftware
             var currentRowIndex = ApplicationsGrid.Items.IndexOf(ApplicationsGrid.CurrentItem);
             var selectedApplication = (VisaApplication)ApplicationsGrid.SelectedItems[0];
             var curRowTime = selectedApplication.Time;
-            var indexInAllApointments = visaApplicationCenter.VisaApplicationAppointments.getApplicationIndexFromTime(curRowTime);
+            //var indexInAllApointments = visaApplicationCenter.VisaApplicationAppointments.getApplicationIndexFromTime(curRowTime);
+            var indexInAllApointments = getApplicationIndexFromTime(visaApplicationCenter.VisaApplicationAppointments,curRowTime);
             visaApplicationCenter.VisaApplicationAppointments[indexInAllApointments].IsAvailable = true;
             refreshTakenVisaAppointmentSlots();
             refreshAvailableVisaAppointmentSlots();
@@ -501,6 +505,18 @@ namespace FinalProjectSoftware
         private void TextChangeApplicantFunds(object sender, TextChangedEventArgs e)
         {
             updateApplicantFunds();
+        }
+
+        public int getApplicationIndexFromTime(VisaApplicationList ApplicationList, String time)
+        {
+            for (int i = 0; i < ApplicationList.Count; i++)
+            {
+                if (ApplicationList[i].Time == time)
+                {
+                    return i;
+                }
+            }
+            return -1;
         }
     }
 
