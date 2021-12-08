@@ -169,21 +169,20 @@ namespace FinalProjectSoftware
                 var query = from appt in visaApplicationCenter.TakenVisaApplicationAppointments
                             where appt.Applicant.Name.ToLower().StartsWith(searchQuery.ToLower())
                             select appt;
-                //uncomment below line when appointmentsGrid is ready
-                //AppointmentsGrid.ItemsSource = query;
+                ApplicationsGrid.ItemsSource = query;
                 TxtSearchQuery.Text = "";
             }
             else
             {
                 MessageBox.Show("Empty search query");
-                //uncomment below line when appointmentsGrid is ready
-                //AppointmentsGrid.ItemsSource = visaApplicationCenter.TakenVisaApplicationAppointments;
+                ApplicationsGrid.ItemsSource = visaApplicationCenter.TakenVisaApplicationAppointments;
             }
         }
 
         private void btnDisplayClicked(object sender, RoutedEventArgs e)
         {
             ReadXMLFile();
+            refreshGridSource();
         }
 
         private void btnSaveDataClicked(object sender, RoutedEventArgs e)
@@ -193,6 +192,7 @@ namespace FinalProjectSoftware
 
         private void btn_ApplyForVisa(object sender, RoutedEventArgs e)
         {
+
             //resetting the initial state
             BorderVisaTypeSelector.BorderBrush = Brushes.Transparent;
             BorderSlotSelector.BorderBrush = Brushes.Transparent;
@@ -212,6 +212,7 @@ namespace FinalProjectSoftware
 
             if (validateInput(slotSelectedIndex,name,birthday,passport,phoneString, countryIndex)) 
             {
+                refreshGridSource();
                 //logic for validation successfull
                 if (uint.TryParse(phoneString, out phone)) 
                 {
@@ -400,11 +401,18 @@ namespace FinalProjectSoftware
         private void btnDeleteRowClicked(object sender, RoutedEventArgs e)
         {
             var currentRowIndex = ApplicationsGrid.Items.IndexOf(ApplicationsGrid.CurrentItem);
-            var curRowTime = visaApplicationCenter.TakenVisaApplicationAppointments[currentRowIndex].Time;
+            var selectedApplication = (VisaApplication)ApplicationsGrid.SelectedItems[0];
+            var curRowTime = selectedApplication.Time;
             var indexInAllApointments = visaApplicationCenter.VisaApplicationAppointments.getApplicationIndexFromTime(curRowTime);
             visaApplicationCenter.VisaApplicationAppointments[indexInAllApointments].IsAvailable = true;
             refreshTakenVisaAppointmentSlots();
             refreshAvailableVisaAppointmentSlots();
+            refreshGridSource();
+        }
+
+        private void refreshGridSource()
+        {
+            ApplicationsGrid.ItemsSource = visaApplicationCenter.TakenVisaApplicationAppointments;
         }
     }
 

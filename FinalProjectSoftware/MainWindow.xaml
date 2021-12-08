@@ -125,7 +125,7 @@
         <StackPanel Orientation="Vertical"  Grid.Row="0" Grid.Column="1">
             <DataGrid Name="ApplicationsGrid" HorizontalAlignment="Left"  VerticalAlignment="Top"
                   Height="350" Margin="10,10,0,0" 
-                  AutoGenerateColumns="False" ItemsSource="{Binding Path=TakenVisaApplicationAppointments}">
+                  AutoGenerateColumns="False" ItemsSource="{Binding Path=TakenVisaApplicationAppointments}" IsReadOnly="False">
                 <DataGrid.RowStyle>
                     <Style TargetType="DataGridRow">
                         
