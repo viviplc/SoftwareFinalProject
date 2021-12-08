@@ -196,8 +196,10 @@ namespace FinalProjectSoftware
             //resetting the initial state
             BorderVisaTypeSelector.BorderBrush = Brushes.Transparent;
             BorderSlotSelector.BorderBrush = Brushes.Transparent;
+            BorderBirthdayPck.BorderBrush = Brushes.Transparent;
             BorderCountrySelector.BorderBrush = Brushes.Transparent;
             LblErrorMessages.Text = "";
+            ErrorScroll.Visibility = Visibility.Hidden;
 
             int slotSelectedIndex = CBSlotSelector.SelectedIndex;
             String slotSelected = CBSlotSelector.Text;
@@ -300,6 +302,7 @@ namespace FinalProjectSoftware
         {
             BorderVisaTypeSelector.BorderBrush = Brushes.Transparent;
             BorderSlotSelector.BorderBrush = Brushes.Transparent;
+            BorderBirthdayPck.BorderBrush = Brushes.Transparent;
             BorderCountrySelector.BorderBrush = Brushes.Transparent;
             CBSlotSelector.SelectedIndex = -1;
             TxtApplicantName.Text="";
@@ -356,11 +359,13 @@ namespace FinalProjectSoftware
                 {
                     passValidation = false;
                     validation += "Invalid birth date. \n";
+                    BorderBirthdayPck.BorderBrush = Brushes.Red;
                 }
             }
             else {
                 passValidation = false;
                 validation += "Invalid birth date. \n";
+                BorderBirthdayPck.BorderBrush = Brushes.Red;
             }
             
 

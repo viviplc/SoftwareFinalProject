@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace FinalProjectSoftware.Classes
 {
@@ -25,6 +26,8 @@ namespace FinalProjectSoftware.Classes
         public string Birthday { get => birthday; set => birthday = value; }
         public string Country { get => country; set => country = value; }
         public Visa Visa { get => visa; set => visa = value; }
+
+        [XmlIgnore]
         public short ChosenVisaType { get => chosenVisaType; set => chosenVisaType = value; }
         public uint Phone { get => phone; set => phone = value; }
 
