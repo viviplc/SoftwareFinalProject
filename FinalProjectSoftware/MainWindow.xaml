@@ -6,11 +6,13 @@
         xmlns:local="clr-namespace:FinalProjectSoftware"
         xmlns:local1="clr-namespace:FinalProjectSoftware.Classes"
         xmlns:local2="clr-namespace:FinalProjectSoftware.Rules"
+        xmlns:local3="clr-namespace:FinalProjectSoftware.Converters"
         mc:Ignorable="d"
         DataContext="local:VisaApplicationCenter"
         Title="Visa Application Center" Height="550" Width="850">
     <Window.Resources>
         <local1:VisaApplicant x:Key="applicant"/>
+        <local3:AgeConverter x:Key="ageConverter"/>
     </Window.Resources>
     <Grid>
         <Grid.Resources>
@@ -130,7 +132,7 @@
                   AutoGenerateColumns="False" ItemsSource="{Binding Path=TakenVisaApplicationAppointments}" IsReadOnly="False">
                 <DataGrid.RowStyle>
                     <Style TargetType="DataGridRow">
-                        
+                        <Setter Property="Background" Value="{Binding Applicant.Age, Converter={StaticResource ageConverter}}" />
                     </Style>
                 </DataGrid.RowStyle>
                 <DataGrid.Columns>
