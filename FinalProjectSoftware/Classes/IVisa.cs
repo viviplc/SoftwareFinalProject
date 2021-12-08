@@ -8,7 +8,7 @@ namespace FinalProjectSoftware.Classes
     public interface IVisa : IComparable<IVisa>
     {
         public DateTime ApplicationDate { get; set; }
-        public DateTime ExpirationDate { get; set; }
+        public String ExpirationDate { get; set; }
         public string ServicesProvided { get; set; }
         public string VisaType { get; set; }
         VisaServicesDelegate ServicesDelegate { get; set; }

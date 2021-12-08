@@ -271,7 +271,7 @@ namespace FinalProjectSoftware
 
                     DateTime today = DateTime.Now;
                     visa.ApplicationDate = today;
-                    visa.ExpirationDate = today.AddYears(expirationRange);
+                    visa.ExpirationDate = today.AddYears(expirationRange).ToShortDateString();
                     applicant.Visa = visa;
                     application.Applicant = applicant;
                     application.UCI = uci;

@@ -8,7 +8,7 @@ namespace FinalProjectSoftware.Classes
     public abstract class Visa : IVisa
     {
         private DateTime applicationDate;
-        private DateTime expirationDate;
+        private String expirationDate;
         private String servicesProvided;
         private String visaType;
 
@@ -27,7 +27,7 @@ namespace FinalProjectSoftware.Classes
         }
 
         public DateTime ApplicationDate { get => applicationDate; set => applicationDate = value; }
-        public DateTime ExpirationDate { get => expirationDate; set => expirationDate = value; }
+        public String ExpirationDate { get => expirationDate; set => expirationDate = value; }
         [XmlIgnore]
         public string ServicesProvided { get => servicesProvided; set => servicesProvided = value; }
         
