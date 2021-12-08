@@ -71,9 +71,9 @@
                      x:Name="TxtApplicantName" 
                      HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"
                      ToolTip="{Binding ElementName=TxtApplicantName,
-                       Path=(Validation.Errors)[0].ErrorContent}">
+                       Path=(Validation.Errors)[0].ErrorContent, UpdateSourceTrigger=PropertyChanged}">
                 <TextBox.Text>
-                    <Binding Path="Name" NotifyOnValidationError="False">
+                    <Binding Path="Name" NotifyOnValidationError="False" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <local2:ApplicantNameRule Min="1" Max="100"/>
                         </Binding.ValidationRules>
@@ -89,9 +89,9 @@
                      x:Name="TxtApplicantPassport" 
                      HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"
                      ToolTip="{Binding ElementName=TxtApplicantPassport,
-                       Path=(Validation.Errors)[0].ErrorContent}">
+                       Path=(Validation.Errors)[0].ErrorContent, UpdateSourceTrigger=PropertyChanged}">
                 <TextBox.Text>
-                    <Binding Path="PassportNumber" NotifyOnValidationError="False">
+                    <Binding Path="PassportNumber" NotifyOnValidationError="False" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <local2:ApplicantPassportRule Min="7" Max="9"/>
                         </Binding.ValidationRules>
@@ -103,9 +103,10 @@
                      x:Name="TxtApplicantPhone" 
                      HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"
                      ToolTip="{Binding ElementName=TxtApplicantPhone,
-                       Path=(Validation.Errors)[0].ErrorContent}">
+                       Path=(Validation.Errors)[0].ErrorContent, UpdateSourceTrigger=PropertyChanged}"
+                     >
                 <TextBox.Text>
-                    <Binding Path="Phone" NotifyOnValidationError="False">
+                    <Binding Path="Phone" NotifyOnValidationError="False" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <local2:ApplicantPhoneRule Size="10"/>
                         </Binding.ValidationRules>
