@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FinalProjectSoftware.Classes
 {
-    public class Funds
+    public class Funds : IFunds
     {
         private double amount;
         private bool fromSponsor;
