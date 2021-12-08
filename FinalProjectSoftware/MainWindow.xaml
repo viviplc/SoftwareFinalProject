@@ -79,7 +79,9 @@
                 </TextBox.Text>
             </TextBox>
             <Label Content="Applicant Birthday" HorizontalAlignment="Left" VerticalAlignment="Top" />
-            <DatePicker x:Name="PckBirthday" DisplayDate="2021-12-06" />
+            <Border x:Name="BorderBirthdayPck" HorizontalAlignment="Left"  VerticalAlignment="Top" BorderThickness="1" Margin="2">
+                <DatePicker x:Name="PckBirthday" DisplayDate="2021-12-06" />
+            </Border>
             <Label Content="Applicant Passport" HorizontalAlignment="Left" VerticalAlignment="Top" />
             <TextBox DataContext="{StaticResource applicant}"
                      x:Name="TxtApplicantPassport" 
