@@ -42,10 +42,17 @@ namespace FinalProjectSoftware
                 TxtApplicantPassport_ValidationError);
             Validation.AddErrorHandler(this.TxtApplicantPhone,
                 TxtApplicantPhone_ValidationError);
-
+            Validation.AddErrorHandler(this.TxtApplicantFunds,
+                TxtApplicantFunds_ValidationError);
+            
 
         }
 
+        protected void TxtApplicantFunds_ValidationError(object sender,
+            ValidationErrorEventArgs e)
+        {
+            MessageBox.Show((string)e.Error.ErrorContent);
+        }
         protected void TxtApplicantPhone_ValidationError(object sender,
             ValidationErrorEventArgs e)
         {
@@ -192,7 +199,10 @@ namespace FinalProjectSoftware
 
         private void btn_ApplyForVisa(object sender, RoutedEventArgs e)
         {
-
+            updateApplicantName();
+            updateApplicantPassport();
+            updateApplicantPhone();
+            updateApplicantFunds();
             //resetting the initial state
             BorderVisaTypeSelector.BorderBrush = Brushes.Transparent;
             BorderSlotSelector.BorderBrush = Brushes.Transparent;
@@ -207,7 +217,7 @@ namespace FinalProjectSoftware
             String birthday = PckBirthday.Text;
             String passport = TxtApplicantPassport.Text;
             String phoneString = TxtApplicantPhone.Text;
-            String fundsString = TxtApplicantFounds.Text;
+            String fundsString = TxtApplicantFunds.Text;
             bool fundsSponsor = (bool)CheckSponsor.IsChecked;
             int countryIndex = CBCountrySelector.SelectedIndex;
             String country = CBCountrySelector.Text;
@@ -308,6 +318,7 @@ namespace FinalProjectSoftware
             PckBirthday.Text="";
             TxtApplicantPassport.Text = "";
             TxtApplicantPhone.Text = "";
+            TxtApplicantFunds.Text = "";
             CBCountrySelector.SelectedIndex = -1;
             LblErrorMessages.Text = "";
             RBStudentVisa.IsChecked = false;
@@ -343,7 +354,7 @@ namespace FinalProjectSoftware
             }
 
             //Applicant Name validation
-            if (name.Length <= 0 || name.Length >= 100)
+            if (name.Length <= 0 || name.Length >= 100 || name == "")
             {
                 passValidation = false;
                 validation += "Invalid name. \n";
@@ -426,6 +437,70 @@ namespace FinalProjectSoftware
         private void refreshGridSource()
         {
             ApplicationsGrid.ItemsSource = visaApplicationCenter.TakenVisaApplicationAppointments;
+        }
+
+        private void updateApplicantName() 
+        {
+            BindingExpression be = TxtApplicantName.GetBindingExpression(TextBox.TextProperty);
+            be.UpdateSource();
+        }
+
+        private void updateApplicantPassport()
+        {
+            BindingExpression be = TxtApplicantPassport.GetBindingExpression(TextBox.TextProperty);
+            be.UpdateSource();
+        }
+
+        private void updateApplicantPhone()
+        {
+            BindingExpression be = TxtApplicantPhone.GetBindingExpression(TextBox.TextProperty);
+            be.UpdateSource();
+        }
+
+        private void updateApplicantFunds()
+        {
+            BindingExpression be = TxtApplicantFunds.GetBindingExpression(TextBox.TextProperty);
+            be.UpdateSource();
+        }
+
+        private void TextChangeApplicantName(object sender, RoutedEventArgs e)
+        {
+            updateApplicantName();
+        }
+
+        private void TextChangeApplicantName(object sender, TextCompositionEventArgs e)
+        {
+            updateApplicantName();
+        }
+
+        private void TextChangeApplicantPassport(object sender, RoutedEventArgs e)
+        {
+            updateApplicantPassport();
+        }
+
+        private void TextChangeApplicantPassport(object sender, TextCompositionEventArgs e)
+        {
+            updateApplicantPassport();
+        }
+
+        private void TextChangeApplicantPhone(object sender, TextCompositionEventArgs e)
+        {
+            updateApplicantPhone();
+        }
+
+        private void TextChangeApplicantPhone(object sender, RoutedEventArgs e)
+        {
+            updateApplicantPhone();
+        }
+
+        private void TextChangeApplicantFunds(object sender, RoutedEventArgs e)
+        {
+            updateApplicantFunds();
+        }
+
+        private void TextChangeApplicantFunds(object sender, TextChangedEventArgs e)
+        {
+            updateApplicantFunds();
         }
     }
 

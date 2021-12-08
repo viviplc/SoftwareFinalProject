@@ -8,7 +8,7 @@ using System.Windows.Controls;
 
 namespace FinalProjectSoftware.Rules
 {
-    class ApplicantNameRule : ValidationRule
+    class ApplicantFundsRule : ValidationRule
     {
         private int min;
         private int max;
@@ -24,27 +24,35 @@ namespace FinalProjectSoftware.Rules
             set => max = value;
         }
 
-
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
             ValidationResult result = null;
-            String applicantName = "";
             if (value == null)
             {
                 result = new ValidationResult(false,
-                       "Invalid Applicant Name");
+                       "Invalid Applicant Funds");
             }
             else
             {
-                applicantName = value.ToString();
-                if (applicantName.Length <= min || applicantName.Length >= max)
+                String fundsString = value.ToString();
+                double funds = 0;
+                if (fundsString.Length !=0 && double.TryParse(fundsString, out funds))
                 {
-                    result = new ValidationResult(false,
-                       "Invalid Applicant Name");
+                    if (funds > min && funds < max)
+                    {
+                        result = ValidationResult.ValidResult;
+                    }
+                    else
+                    {
+                        result = new ValidationResult(false,
+                    $"Invalid funds, must be between {min} and {max}");
+                    }
+
                 }
                 else
                 {
-                    result = ValidationResult.ValidResult;
+                    result = new ValidationResult(false,
+                    $"Invalid funds, {fundsString} is not a number");
                 }
             }
             return result;

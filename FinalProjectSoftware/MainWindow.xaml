@@ -9,7 +9,7 @@
         xmlns:local3="clr-namespace:FinalProjectSoftware.Converters"
         mc:Ignorable="d"
         DataContext="local:VisaApplicationCenter"
-        Title="Visa Application Center" Height="550" Width="850">
+        Title="Visa Application Center" Height="610" Width="850">
     <Window.Resources>
         <local1:VisaApplicant x:Key="applicant"/>
         <local1:VisaApplication x:Key="application"/>
@@ -78,9 +78,10 @@
                      x:Name="TxtApplicantName" 
                      HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"
                      ToolTip="{Binding ElementName=TxtApplicantName,
-                       Path=(Validation.Errors)[0].ErrorContent, UpdateSourceTrigger=PropertyChanged}">
+                       Path=(Validation.Errors)[0].ErrorContent, UpdateSourceTrigger=Explicit}" 
+                     LostFocus="TextChangeApplicantName" TextInput="TextChangeApplicantName">
                 <TextBox.Text>
-                    <Binding Path="Name" NotifyOnValidationError="False" UpdateSourceTrigger="PropertyChanged">
+                    <Binding Path="Name" NotifyOnValidationError="False" UpdateSourceTrigger="Explicit">
                         <Binding.ValidationRules>
                             <local2:ApplicantNameRule Min="1" Max="100"/>
                         </Binding.ValidationRules>
@@ -96,9 +97,9 @@
                      x:Name="TxtApplicantPassport" 
                      HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"
                      ToolTip="{Binding ElementName=TxtApplicantPassport,
-                       Path=(Validation.Errors)[0].ErrorContent, UpdateSourceTrigger=PropertyChanged}">
+                       Path=(Validation.Errors)[0].ErrorContent, UpdateSourceTrigger=Explicit}" LostFocus="TextChangeApplicantPassport" TextInput="TextChangeApplicantPassport">
                 <TextBox.Text>
-                    <Binding Path="PassportNumber" NotifyOnValidationError="False" UpdateSourceTrigger="PropertyChanged">
+                    <Binding Path="PassportNumber" NotifyOnValidationError="False" UpdateSourceTrigger="Explicit">
                         <Binding.ValidationRules>
                             <local2:ApplicantPassportRule Min="7" Max="9"/>
                         </Binding.ValidationRules>
@@ -110,20 +111,29 @@
                      x:Name="TxtApplicantPhone" 
                      HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"
                      ToolTip="{Binding ElementName=TxtApplicantPhone,
-                       Path=(Validation.Errors)[0].ErrorContent, UpdateSourceTrigger=PropertyChanged}"
+                       Path=(Validation.Errors)[0].ErrorContent, UpdateSourceTrigger=Explicit}" TextInput="TextChangeApplicantPhone" LostFocus="TextChangeApplicantPhone"
                      >
                 <TextBox.Text>
-                    <Binding Path="Phone" NotifyOnValidationError="False" UpdateSourceTrigger="PropertyChanged">
+                    <Binding Path="Phone" NotifyOnValidationError="False" UpdateSourceTrigger="Explicit">
                         <Binding.ValidationRules>
                             <local2:ApplicantPhoneRule Size="10"/>
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox.Text>
             </TextBox>
-            <Label Content="Applicant Founds" HorizontalAlignment="Left" VerticalAlignment="Top" />
+            <Label Content="Applicant Funds" HorizontalAlignment="Left" VerticalAlignment="Top" />
             <TextBox DataContext="{StaticResource application}"
-                     x:Name="TxtApplicantFounds" 
-                     HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top">
+                     x:Name="TxtApplicantFunds" 
+                     HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" 
+                     ToolTip="{Binding ElementName=TxtApplicantFunds,
+                       Path=(Validation.Errors)[0].ErrorContent, UpdateSourceTrigger=Explicit}" LostFocus="TextChangeApplicantFunds" TextChanged="TextChangeApplicantFunds" >
+                <TextBox.Text>
+                    <Binding Path="Funds" NotifyOnValidationError="False" UpdateSourceTrigger="Explicit">
+                        <Binding.ValidationRules>
+                            <local2:ApplicantFundsRule Min="5000" Max="20000"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
             </TextBox>
             <CheckBox x:Name="CheckSponsor" Content="Sponsor Funds" />
             <Label Content="Applicant Country" HorizontalAlignment="Left" VerticalAlignment="Top" />

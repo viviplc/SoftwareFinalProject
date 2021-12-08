@@ -25,16 +25,24 @@ namespace FinalProjectSoftware.Rules
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
             ValidationResult result = null;
-            String passportNumber = value.ToString();
-            if (passportNumber.Length >= min && passportNumber.Length <= max)
-            {
-                result = ValidationResult.ValidResult;
-            }
-            else
+            if (value == null)
             {
                 result = new ValidationResult(false,
-                $"Invalid Passport Number. Must be between {min} and {max}.");
+                       "Invalid Applicant Passport");
             }
+            else {
+                String passportNumber = value.ToString();
+                if (passportNumber.Length >= min && passportNumber.Length <= max)
+                {
+                    result = ValidationResult.ValidResult;
+                }
+                else
+                {
+                    result = new ValidationResult(false,
+                    $"Invalid Passport Number. Must be between {min} and {max}.");
+                }
+            }
+            
             return result;
         }
     }
