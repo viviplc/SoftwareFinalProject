@@ -5,14 +5,14 @@ using System.Text;
 namespace FinalProjectSoftware.Classes
 {
     public delegate void VisaServicesDelegate();
-    interface IVisa : IComparable<IVisa>
+    public interface IVisa : IComparable<IVisa>
     {
         public DateTime ApplicationDate { get; set; }
-        public DateTime ExpirationDate { get; set; }
-        public string UCI { get; set; }
+        public String ExpirationDate { get; set; }
         public string ServicesProvided { get; set; }
         public string VisaType { get; set; }
         VisaServicesDelegate ServicesDelegate { get; set; }
         public void CallServicesProvided();
+        public int getUCIId();
     }
 }

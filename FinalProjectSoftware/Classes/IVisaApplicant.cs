@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FinalProjectSoftware.Classes
 {
-    interface IApplicant : IComparable<IApplicant>
+    public interface IVisaApplicant : IComparable<IVisaApplicant>
     {
         public string Name { get; set; }
         public uint Age { get; set; }

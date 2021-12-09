@@ -4,34 +4,42 @@ using System.Text;
 
 namespace FinalProjectSoftware.Classes
 {
-    class VisaApplication
+    public enum Visas
+    {
+        WorkVisa = 1, StudentVisa = 2, TourismVisa = 3
+    }
+    public class VisaApplication : IVisaApplication
     {
         private VisaApplicant applicant;
         private String time;
         private Boolean isAvailable;
-        private int applicationNumber;
+        private String uci;
         private Funds funds;
 
         public string Time { get => time; set => time = value; }
         public bool IsAvailable { get => isAvailable; set => isAvailable = value; }
         public VisaApplicant Applicant { get => applicant; set => applicant = value; }
-        public int ApplicationNumber { get => applicationNumber; set => applicationNumber = value; }
+        public String UCI { get => uci; set => uci = value; }
         public Funds Funds { get => funds; set => funds = value; }
 
         public override string ToString()
         {
-            String applicationString = $"Application Number {applicationNumber}\n";
-            applicationString += $"\t\t Time:  {time}, {applicant}, Visa Operations: {applicant.Visa.getInfoVisa()} \n";
-            return applicationString;
+            if (!isAvailable)
+            {
+                String applicationString = $"Application Number {uci}\n";
+                applicationString += $"\t\t Time:  {time}, {applicant}, Visa Operations: {applicant.Visa.getInfoVisa()} \n";
+                return applicationString;
+            }
+
+            return $"Hour:  {time}";
+
+            
+            
         }
 
-        /*
-         * needs to be implemented after IApplicant is done
-         * here I am comparing only main applicants as opposed to comparing all applicants in this application with all applicants in the other application
-        public int CompareTo(IApplication other)
+        public int CompareTo(IVisaApplication other)
         {
-            return getMainApplicant().CompareTo(other.getMainApplicant());
+            return applicant.CompareTo(other.Applicant);
         }
-        */
     }
 }

@@ -1,38 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace FinalProjectSoftware.Classes
 {
-    abstract class Visa
+    public abstract class Visa : IVisa
     {
         private DateTime applicationDate;
-        private DateTime expirationDate;
-        private String uci;
+        private String expirationDate;
         private String servicesProvided;
         private String visaType;
-        //Delegate Pending
-        //private VisaServicesDelegate servicesDelegate = null;
 
-        public Visa()
-        {
-            //setupVisaServicesDelegate();
-        }
+        private VisaServicesDelegate servicesDelegate = null;
 
-        /*
-        private void setupVisaServicesDelegate()
+        public void setupVisaServicesDelegate()
         {
             servicesDelegate += PayVisaFees;
             servicesDelegate += ConfirmAppointment;
             servicesDelegate += AssignConsul;
         }
-        */
 
         public DateTime ApplicationDate { get => applicationDate; set => applicationDate = value; }
-        public DateTime ExpirationDate { get => expirationDate; set => expirationDate = value; }
-        public string UCI { get => uci; set => uci = value; }
+        public String ExpirationDate { get => expirationDate; set => expirationDate = value; }
+        [XmlIgnore]
         public string ServicesProvided { get => servicesProvided; set => servicesProvided = value; }
+        
         public string VisaType { get => visaType; set => visaType = value; }
+        [XmlIgnore]
+        public VisaServicesDelegate ServicesDelegate { get => servicesDelegate; set => servicesDelegate=value; }
 
         public String getInfoVisa()
         {
@@ -56,6 +52,11 @@ namespace FinalProjectSoftware.Classes
 
         public abstract void CallServicesProvided();
 
-        //Pending applying interfaces compare
+        public int CompareTo(IVisa other)
+        {
+            return visaType.CompareTo(other.VisaType); 
+        }
+
+        public abstract int getUCIId();
     }
 }

@@ -4,11 +4,14 @@ using System.Text;
 
 namespace FinalProjectSoftware.Classes
 {
-    class Funds
+    public class Funds : IFunds
     {
         private double amount;
         private bool fromSponsor;
+        public Funds()
+        {
 
+        }
         public Funds(double amount, bool fromSponsor)
         {
             this.Amount = amount;

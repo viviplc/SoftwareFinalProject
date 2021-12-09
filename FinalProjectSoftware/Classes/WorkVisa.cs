@@ -4,10 +4,17 @@ using System.Text;
 
 namespace FinalProjectSoftware.Classes
 {
-    class WorkVisa : Visa
+    public class WorkVisa : Visa
     {
+        private static int UCI = 0;
+        private int uciId = 0;
+
+        public int UciId { get => uciId; }
+
         public WorkVisa()
         {
+            UCI++;
+            this.uciId = UCI;
         }
 
         public override void CallServicesProvided()
@@ -30,6 +37,11 @@ namespace FinalProjectSoftware.Classes
         public void GetLMIAResults()
         {
             ServicesProvided += "... LMIA Results Provided ...\n";
+        }
+
+        public override int getUCIId()
+        {
+            return this.uciId;
         }
     }
 }
