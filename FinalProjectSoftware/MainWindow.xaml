@@ -9,7 +9,7 @@
         xmlns:local3="clr-namespace:FinalProjectSoftware.Converters"
         mc:Ignorable="d"
         DataContext="local:VisaApplicationCenter"
-        Title="Visa Application Center" Height="610" Width="900">
+        Title="Visa Application Center" Height="610" MinWidth="900" Width="Auto" SizeToContent="Width">
     <Window.Resources>
         <local1:VisaApplicant x:Key="applicant"/>
         <local1:VisaApplication x:Key="application"/>
@@ -165,7 +165,7 @@
         <Button Name="btnCancelEdit"  Content="Cancel" Grid.Row="1" Grid.Column="0" Margin="5 40 5 5" HorizontalAlignment="Center" VerticalAlignment="Top" Click="btn_CancelEdit" Visibility="Hidden"/>
         <StackPanel Orientation="Vertical"  Grid.Row="0" Grid.Column="1">
             <DataGrid Name="ApplicationsGrid" HorizontalAlignment="Left"  VerticalAlignment="Top"
-                  Height="350" Margin="10,10,0,0" 
+                  Height="350" Margin="10,10,10,0" 
                   AutoGenerateColumns="False" ItemsSource="{Binding Path=TakenVisaApplicationAppointments}" CanUserAddRows="False" IsReadOnly="True">
                 <DataGrid.RowStyle>
                     <Style TargetType="DataGridRow">
