@@ -9,7 +9,7 @@
         xmlns:local3="clr-namespace:FinalProjectSoftware.Converters"
         mc:Ignorable="d"
         DataContext="local:VisaApplicationCenter"
-        Title="Visa Application Center" Height="610" Width="850">
+        Title="Visa Application Center" Height="610" Width="900">
     <Window.Resources>
         <local1:VisaApplicant x:Key="applicant"/>
         <local1:VisaApplication x:Key="application"/>
@@ -61,6 +61,7 @@
             </Style>
         </Grid.Resources>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -150,13 +151,14 @@
             </Border>
         </StackPanel>
         <Button Name="btnApplyForVisa" Content="Apply for Visa" Grid.Row="1" Grid.Column="0" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Top" Click="btn_ApplyForVisa"/>
+        <Button Name="btnCancelEdit"  Content="Cancel" Grid.Row="1" Grid.Column="0" Margin="5 40 5 5" HorizontalAlignment="Center" VerticalAlignment="Top" Click="btn_CancelEdit" Visibility="Hidden"/>
         <StackPanel Orientation="Vertical"  Grid.Row="0" Grid.Column="1">
             <DataGrid Name="ApplicationsGrid" HorizontalAlignment="Left"  VerticalAlignment="Top"
                   Height="350" Margin="10,10,0,0" 
-                  AutoGenerateColumns="False" ItemsSource="{Binding Path=TakenVisaApplicationAppointments}" CanUserAddRows="False" IsReadOnly="False">
+                  AutoGenerateColumns="False" ItemsSource="{Binding Path=TakenVisaApplicationAppointments}" CanUserAddRows="False" IsReadOnly="True">
                 <DataGrid.RowStyle>
                     <Style TargetType="DataGridRow">
-                        <Setter Property="Background" Value="{Binding Applicant.Age, Converter={StaticResource ageConverter}}" />
+                        <Setter Property="Background" Value="{Binding Applicant.Age, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ageConverter}}" />
                     </Style>
                 </DataGrid.RowStyle>
                 <DataGrid.Columns>
@@ -183,8 +185,7 @@
                     <DataGridTemplateColumn >
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Width="25"
-                            >
+                                <Button Width="25" Click="btnUpdateRowClicked">
                                     <Image Source="../Icons/pencil.png" Width="20" Height="20"/>
                                 </Button>
                             </DataTemplate>

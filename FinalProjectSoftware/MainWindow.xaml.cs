@@ -27,7 +27,8 @@ namespace FinalProjectSoftware
     {
 
         VisaApplicationCenter visaApplicationCenter = new();
-
+        bool editMode = false;
+        VisaApplication visaApplicationBeingEdited = new();
         public MainWindow()
         {
             InitializeComponent();
@@ -223,11 +224,13 @@ namespace FinalProjectSoftware
             bool fundsSponsor = (bool)CheckSponsor.IsChecked;
             int countryIndex = CBCountrySelector.SelectedIndex;
             String country = CBCountrySelector.Text;
+            VisaApplicationList visaApplications = (VisaApplicationList)CBSlotSelector.ItemsSource;
+            bool isVisaApplicationAlreadyHavingData = !visaApplications[slotSelectedIndex].IsAvailable;
 
             uint phone = 0;
             double funds = 0.0;
 
-            if (validateInput(slotSelectedIndex,name,birthday,passport,phoneString, fundsString ,countryIndex)) 
+            if (validateInput(slotSelectedIndex, name, birthday, passport, phoneString, fundsString, countryIndex))
             {
                 refreshGridSource();
                 //logic for validation successfull
@@ -249,7 +252,7 @@ namespace FinalProjectSoftware
                     }
 
                     //int visaApplicationIndex = visaApplicationCenter.VisaApplicationAppointments.getApplicationIndexFromTime(slotSelected);
-                    int visaApplicationIndex = getApplicationIndexFromTime(visaApplicationCenter.VisaApplicationAppointments,slotSelected);
+                    int visaApplicationIndex = getApplicationIndexFromTime(visaApplicationCenter.VisaApplicationAppointments, slotSelected);
                     VisaApplication application = visaApplicationCenter.VisaApplicationAppointments[visaApplicationIndex];
                     VisaApplicant applicant = new();
                     applicant.Name = name;
@@ -300,6 +303,19 @@ namespace FinalProjectSoftware
                     application.Funds = newFunds;
                     application.Applicant.Visa.ServicesDelegate();
 
+                    if (editMode)
+                    {
+                        string editedApplicationTime = visaApplicationBeingEdited.Time;
+                        string currentApplicationTime = application.Time;
+                        if(editedApplicationTime != currentApplicationTime)
+                        {
+                            int indexOfEditedApplication = getApplicationIndexFromTime(visaApplicationCenter.VisaApplicationAppointments, editedApplicationTime);
+                            visaApplicationCenter.VisaApplicationAppointments[indexOfEditedApplication].IsAvailable = true;
+                        }
+                        editMode = false;
+                        endEditMode();
+                    }
+
                     refreshAvailableVisaAppointmentSlots();
                     refreshTakenVisaAppointmentSlots();
 
@@ -307,6 +323,7 @@ namespace FinalProjectSoftware
                     refreshGridSource();
                 }
             }
+            
 
         }
 
@@ -438,6 +455,84 @@ namespace FinalProjectSoftware
             refreshGridSource();
         }
 
+        private void btnUpdateRowClicked(object sender, RoutedEventArgs e)
+        {
+            editMode = true;
+            startEditMode();
+            var currentRowIndex = ApplicationsGrid.Items.IndexOf(ApplicationsGrid.CurrentItem);
+            VisaApplication selectedApplication = (VisaApplication)ApplicationsGrid.SelectedItems[0];
+            visaApplicationBeingEdited = selectedApplication;
+            TxtApplicantName.Text = selectedApplication.Applicant.Name;
+            PckBirthday.Text = selectedApplication.Applicant.Birthday;
+            TxtApplicantPassport.Text = selectedApplication.Applicant.PassportNumber;
+            TxtApplicantPhone.Text = selectedApplication.Applicant.Phone.ToString();
+            TxtApplicantFunds.Text = selectedApplication.Funds.Amount.ToString();
+            CheckSponsor.IsChecked = selectedApplication.Funds.FromSponsor;
+            CBCountrySelector.SelectedItem = selectedApplication.Applicant.Country;
+
+            switch(selectedApplication.Applicant.Visa.VisaType)
+            {
+                case "Work Visa":
+                    RBWorkVisa.IsChecked = true;
+                    RBStudentVisa.IsChecked = false;
+                    RBTourismVisa.IsChecked = false;
+                    break;
+                case "Student Visa":
+                    RBWorkVisa.IsChecked = false;
+                    RBStudentVisa.IsChecked = true;
+                    RBTourismVisa.IsChecked = false;
+                    break;
+                case "Tourism Visa":
+                    RBWorkVisa.IsChecked = false;
+                    RBStudentVisa.IsChecked = false;
+                    RBTourismVisa.IsChecked = true;
+                    break;
+                default:
+                    RBWorkVisa.IsChecked = false;
+                    RBStudentVisa.IsChecked = false;
+                    RBTourismVisa.IsChecked = false;
+                    break;
+            }
+
+            VisaApplicationList newAppointmentsList = createEditAppointmentList(selectedApplication);
+
+            CBSlotSelector.ItemsSource = newAppointmentsList;
+            CBSlotSelector.SelectedIndex = getApplicationIndexFromTime(newAppointmentsList,selectedApplication.Time);
+        }
+
+        private VisaApplicationList createEditAppointmentList(VisaApplication currentlyEditedApplication)
+        {
+            VisaApplicationList newAppointmentsList = new();
+            foreach(VisaApplication visaApplication in visaApplicationCenter.VisaApplicationAppointments)
+            {
+                if (visaApplication.IsAvailable || (currentlyEditedApplication.Time == visaApplication.Time))
+                {
+                    newAppointmentsList.Add(visaApplication);
+                }
+            }
+            return newAppointmentsList;
+        }
+
+        private void startEditMode()
+        {
+            btnApplyForVisa.Content = "Update";
+            btnCancelEdit.Visibility = Visibility.Visible;
+
+        }
+
+        private void endEditMode()
+        {
+            btnApplyForVisa.Content = "Apply for Visa";
+            btnCancelEdit.Visibility = Visibility.Hidden;
+            resetUserInput();
+            CBSlotSelector.ItemsSource = visaApplicationCenter.AvailableVisaApplicationAppointments;
+        }
+
+        private void btn_CancelEdit(object sender, RoutedEventArgs e)
+        {
+            endEditMode();
+        }
+
         private void refreshGridSource()
         {
             ApplicationsGrid.ItemsSource = visaApplicationCenter.TakenVisaApplicationAppointments;
@@ -518,6 +613,8 @@ namespace FinalProjectSoftware
             }
             return -1;
         }
+
+        
     }
 
    
