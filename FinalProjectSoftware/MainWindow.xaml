@@ -145,7 +145,8 @@
                     </Binding>
                 </TextBox.Text>
             </TextBox>
-            <CheckBox x:Name="CheckSponsor" Content="Sponsor Funds" />
+            <CheckBox x:Name="CheckSponsor" Content="Sponsor Funds" DataContext="{StaticResource application}"
+                      IsChecked="{Binding Path=Funds.FromSponsor, Mode=TwoWay}" />
             <Label Content="Applicant Country" HorizontalAlignment="Left" VerticalAlignment="Top" />
             <Border x:Name="BorderCountrySelector" HorizontalAlignment="Left"  VerticalAlignment="Top" BorderThickness="1" Margin="2">
                 <ComboBox x:Name="CBCountrySelector" HorizontalAlignment="Left" VerticalAlignment="Top" ItemsSource="{Binding Path=CountryList}"/>
