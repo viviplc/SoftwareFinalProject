@@ -14,6 +14,7 @@
         <local1:VisaApplicant x:Key="applicant"/>
         <local1:VisaApplication x:Key="application"/>
         <local3:AgeConverter x:Key="ageConverter"/>
+        <local3:FundsConverter x:Key="fundsConverter"/>
     </Window.Resources>
     <Grid>
         <Grid.Resources>
@@ -126,8 +127,10 @@
             <TextBox DataContext="{StaticResource application}"
                      x:Name="TxtApplicantFunds" 
                      HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" 
-                     ToolTip="{Binding ElementName=TxtApplicantFunds,
-                       Path=(Validation.Errors)[0].ErrorContent, UpdateSourceTrigger=Explicit}" LostFocus="TextChangeApplicantFunds" TextChanged="TextChangeApplicantFunds" >
+                     ToolTip="{Binding ElementName=TxtApplicantFunds,Path=(Validation.Errors)[0].ErrorContent, UpdateSourceTrigger=Explicit}" 
+                     LostFocus="TextChangeApplicantFunds" TextChanged="TextChangeApplicantFunds" 
+                     Background="{Binding ElementName=TxtApplicantFunds, Path=Text, 
+                                    UpdateSourceTrigger=Default, Converter={StaticResource fundsConverter}}">
                 <TextBox.Text>
                     <Binding Path="Funds" NotifyOnValidationError="False" UpdateSourceTrigger="Explicit">
                         <Binding.ValidationRules>
