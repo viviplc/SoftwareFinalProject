@@ -31,8 +31,6 @@ namespace FinalProjectSoftware.Classes
         public short ChosenVisaType { get => chosenVisaType; set => chosenVisaType = value; }
         public uint Phone { get => phone; set => phone = value; }
 
-        public string PhoneString { get { return Phone.ToString(); } }
-
         public override string ToString()
         {
             return $"Name:  {name}, Age: {age}, Passport Number: {passportNumber}, Phone: {phone}, Birthday: {Birthday}, Country: {Country}";
