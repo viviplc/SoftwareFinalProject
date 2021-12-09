@@ -46,7 +46,8 @@ namespace FinalProjectSoftware
                 TxtApplicantPhone_ValidationError);
             Validation.AddErrorHandler(this.TxtApplicantFunds,
                 TxtApplicantFunds_ValidationError);
-            
+
+            refreshEditUpdateColumnVisibility();
 
         }
 
@@ -176,23 +177,29 @@ namespace FinalProjectSoftware
             String searchQuery = TxtSearchQuery.Text;
             if (searchQuery.Length > 0)
             {
-                var query = from appt in visaApplicationCenter.TakenVisaApplicationAppointments
-                            where appt.Applicant.Name.ToLower().StartsWith(searchQuery.ToLower())
-                            select appt;
-                ApplicationsGrid.ItemsSource = query;
-                TxtSearchQuery.Text = "";
+                if(visaApplicationCenter.TakenVisaApplicationAppointments != null)
+                {
+                    var query = from appt in visaApplicationCenter.TakenVisaApplicationAppointments
+                                where appt.Applicant.Name.ToLower().StartsWith(searchQuery.ToLower())
+                                select appt;
+                    ApplicationsGrid.ItemsSource = query;
+                    TxtSearchQuery.Text = "";
+                }
             }
             else
             {
                 MessageBox.Show("Empty search query");
                 ApplicationsGrid.ItemsSource = visaApplicationCenter.TakenVisaApplicationAppointments;
             }
+            
+            refreshEditUpdateColumnVisibility();
         }
 
         private void btnDisplayClicked(object sender, RoutedEventArgs e)
         {
             ReadXMLFile();
             refreshGridSource();
+            refreshEditUpdateColumnVisibility();
         }
 
         private void btnSaveDataClicked(object sender, RoutedEventArgs e)
@@ -339,6 +346,7 @@ namespace FinalProjectSoftware
 
                     resetUserInput();
                     refreshGridSource();
+                    refreshEditUpdateColumnVisibility();
                 }
             }
             
@@ -471,6 +479,7 @@ namespace FinalProjectSoftware
             refreshTakenVisaAppointmentSlots();
             refreshAvailableVisaAppointmentSlots();
             refreshGridSource();
+            refreshEditUpdateColumnVisibility();
         }
 
         private void btnUpdateRowClicked(object sender, RoutedEventArgs e)
@@ -638,7 +647,20 @@ namespace FinalProjectSoftware
             return -1;
         }
 
-        
+        private void refreshEditUpdateColumnVisibility()
+        {
+            var num = ApplicationsGrid.Items.Count;
+            if(num == 0)
+            {
+                ApplicationsGrid.Columns[ApplicationsGrid.Columns.Count - 1].Visibility = Visibility.Hidden;
+                ApplicationsGrid.Columns[ApplicationsGrid.Columns.Count - 2].Visibility = Visibility.Hidden;
+            } else
+            {
+                ApplicationsGrid.Columns[ApplicationsGrid.Columns.Count - 1].Visibility = Visibility.Visible;
+                ApplicationsGrid.Columns[ApplicationsGrid.Columns.Count - 2].Visibility = Visibility.Visible;
+            }
+        }
+
     }
 
    
