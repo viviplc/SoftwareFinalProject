@@ -272,19 +272,39 @@ namespace FinalProjectSoftware
                             visa = new WorkVisa();
                             visa.VisaType = "Work Visa";
                             expirationRange = 5;
-                            uci = $"WK-{visa.getUCIId()}";
+                            if (visaApplicationBeingEdited.Applicant.Visa.VisaType == visa.VisaType)
+                            {
+                                uci = visaApplicationBeingEdited.UCI;
+                            } else
+                            {
+                                uci = $"WK-{visa.getUCIId()}";
+                            }
                             break;
                         case Visas.StudentVisa:
                             visa = new StudentVisa();
                             visa.VisaType = "Student Visa";
                             expirationRange = 2;
-                            uci = $"ST-{visa.getUCIId()}";
+                            if (visaApplicationBeingEdited.Applicant.Visa.VisaType == visa.VisaType)
+                            {
+                                uci = visaApplicationBeingEdited.UCI;
+                            }
+                            else
+                            {
+                                uci = $"ST-{visa.getUCIId()}";
+                            }
                             break;
                         case Visas.TourismVisa:
                             visa = new TouristVisa();
                             visa.VisaType = "Tourist Visa";
                             expirationRange = 10;
-                            uci = $"TO-{visa.getUCIId()}";
+                            if (visaApplicationBeingEdited.Applicant.Visa.VisaType == visa.VisaType)
+                            {
+                                uci = visaApplicationBeingEdited.UCI;
+                            }
+                            else
+                            {
+                                uci = $"TO-{visa.getUCIId()}";
+                            }
                             break;
                         default:
                             break;
@@ -490,7 +510,7 @@ namespace FinalProjectSoftware
                 default:
                     RBWorkVisa.IsChecked = false;
                     RBStudentVisa.IsChecked = false;
-                    RBTourismVisa.IsChecked = false;
+                    RBTourismVisa.IsChecked = true;
                     break;
             }
 
