@@ -270,7 +270,7 @@ namespace FinalProjectSoftware
                             visa = new WorkVisa();
                             visa.VisaType = "Work Visa";
                             expirationRange = 5;
-                            if (visaApplicationBeingEdited.Applicant.Visa.VisaType == visa.VisaType)
+                            if (visaApplicationBeingEdited.Applicant != null&&visaApplicationBeingEdited.Applicant.Visa.VisaType == visa.VisaType)
                             {
                                 uci = visaApplicationBeingEdited.UCI;
                             } else
@@ -282,7 +282,7 @@ namespace FinalProjectSoftware
                             visa = new StudentVisa();
                             visa.VisaType = "Student Visa";
                             expirationRange = 2;
-                            if (visaApplicationBeingEdited.Applicant.Visa.VisaType == visa.VisaType)
+                            if (visaApplicationBeingEdited.Applicant!=null&&visaApplicationBeingEdited.Applicant.Visa.VisaType == visa.VisaType)
                             {
                                 uci = visaApplicationBeingEdited.UCI;
                             }
@@ -295,7 +295,7 @@ namespace FinalProjectSoftware
                             visa = new TouristVisa();
                             visa.VisaType = "Tourist Visa";
                             expirationRange = 10;
-                            if (visaApplicationBeingEdited.Applicant.Visa.VisaType == visa.VisaType)
+                            if (visaApplicationBeingEdited.Applicant != null&&visaApplicationBeingEdited.Applicant.Visa.VisaType == visa.VisaType)
                             {
                                 uci = visaApplicationBeingEdited.UCI;
                             }

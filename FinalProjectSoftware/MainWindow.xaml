@@ -73,7 +73,8 @@
         <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0" Margin="10,10,10,5" >
             <Label Content="Select a slot" HorizontalAlignment="Left" VerticalAlignment="Top" />
             <Border x:Name="BorderSlotSelector" HorizontalAlignment="Left"  VerticalAlignment="Top" BorderThickness="1" Margin="2">
-                <ComboBox x:Name="CBSlotSelector" HorizontalAlignment="Left" VerticalAlignment="Top" DisplayMemberPath="Time" ItemsSource="{Binding Path=AvailableVisaApplicationAppointments}"/>
+                <ComboBox x:Name="CBSlotSelector" HorizontalAlignment="Left" VerticalAlignment="Top" DisplayMemberPath="Time" 
+                          ItemsSource="{Binding Path=AvailableVisaApplicationAppointments}"/>
             </Border>
             <Label Content="Applicant Name" HorizontalAlignment="Left" VerticalAlignment="Top" />
             <TextBox DataContext="{StaticResource applicant}"
