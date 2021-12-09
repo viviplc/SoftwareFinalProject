@@ -15,6 +15,7 @@
         <local1:VisaApplication x:Key="application"/>
         <local3:AgeConverter x:Key="ageConverter"/>
         <local3:FundsConverter x:Key="fundsConverter"/>
+        <local3:VisaTypeConverter x:Key="visaTypeConverter"/>
     </Window.Resources>
     <Grid>
         <Grid.Resources>
@@ -154,9 +155,9 @@
             <Border x:Name="BorderVisaTypeSelector" HorizontalAlignment="Left"  VerticalAlignment="Top" BorderThickness="1" Margin="0,5,0,0">
                 <StackPanel Orientation="Vertical">
                     <Label Content="Select a Visa Type" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" />
-                    <RadioButton x:Name="RBWorkVisa" Content="Work Visa" HorizontalAlignment="Left"  VerticalAlignment="Top"  GroupName="RBVisaType"/>
-                    <RadioButton x:Name="RBStudentVisa" Content="Student Visa" HorizontalAlignment="Left" VerticalAlignment="Top"  GroupName="RBVisaType"/>
-                    <RadioButton x:Name="RBTourismVisa" Content="Tourism Visa" HorizontalAlignment="Left" VerticalAlignment="Top" GroupName="RBVisaType"/>
+                    <RadioButton x:Name="RBWorkVisa" IsChecked="{Binding SelectedOption, Converter={StaticResource visaTypeConverter}, ConverterParameter={x:Static local1:VisaTypes.WorkVisa}}" Content="Work Visa" HorizontalAlignment="Left"  VerticalAlignment="Top"  GroupName="RBVisaType"/>
+                    <RadioButton x:Name="RBStudentVisa" IsChecked="{Binding SelectedOption, Converter={StaticResource visaTypeConverter}, ConverterParameter={x:Static local1:VisaTypes.StudentVisa}}" Content="Student Visa" HorizontalAlignment="Left" VerticalAlignment="Top"  GroupName="RBVisaType"/>
+                    <RadioButton x:Name="RBTourismVisa" IsChecked="{Binding SelectedOption, Converter={StaticResource visaTypeConverter}, ConverterParameter={x:Static local1:VisaTypes.TouristVisa}}" Content="Tourism Visa" HorizontalAlignment="Left" VerticalAlignment="Top" GroupName="RBVisaType"/>
                 </StackPanel>
             </Border>
         </StackPanel>
