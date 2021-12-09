@@ -224,8 +224,6 @@ namespace FinalProjectSoftware
             bool fundsSponsor = (bool)CheckSponsor.IsChecked;
             int countryIndex = CBCountrySelector.SelectedIndex;
             String country = CBCountrySelector.Text;
-            VisaApplicationList visaApplications = (VisaApplicationList)CBSlotSelector.ItemsSource;
-            bool isVisaApplicationAlreadyHavingData = !visaApplications[slotSelectedIndex].IsAvailable;
 
             uint phone = 0;
             double funds = 0.0;
@@ -365,7 +363,7 @@ namespace FinalProjectSoftware
             RBWorkVisa.IsChecked = false;
             RBTourismVisa.IsChecked = false;
             ErrorScroll.Visibility = Visibility.Hidden;
-
+            CheckSponsor.IsChecked = false;
         }
 
         private uint calculateApplicantAge(string birthday)
@@ -477,6 +475,7 @@ namespace FinalProjectSoftware
 
         private void btnUpdateRowClicked(object sender, RoutedEventArgs e)
         {
+            resetUserInput();
             editMode = true;
             startEditMode();
             var currentRowIndex = ApplicationsGrid.Items.IndexOf(ApplicationsGrid.CurrentItem);
@@ -518,6 +517,11 @@ namespace FinalProjectSoftware
 
             CBSlotSelector.ItemsSource = newAppointmentsList;
             CBSlotSelector.SelectedIndex = getApplicationIndexFromTime(newAppointmentsList,selectedApplication.Time);
+
+            updateApplicantName();
+            updateApplicantPassport();
+            updateApplicantPhone();
+            updateApplicantFunds();
         }
 
         private VisaApplicationList createEditAppointmentList(VisaApplication currentlyEditedApplication)

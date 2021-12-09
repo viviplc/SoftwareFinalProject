@@ -128,7 +128,7 @@
                      x:Name="TxtApplicantFunds" 
                      HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" 
                      ToolTip="{Binding ElementName=TxtApplicantFunds,Path=(Validation.Errors)[0].ErrorContent, UpdateSourceTrigger=Explicit}" 
-                     LostFocus="TextChangeApplicantFunds" TextChanged="TextChangeApplicantFunds" 
+                     LostFocus="TextChangeApplicantFunds" TextInput="TextChangeApplicantFunds" 
                      Background="{Binding ElementName=TxtApplicantFunds, Path=Text, 
                                     UpdateSourceTrigger=Default, Converter={StaticResource fundsConverter}}">
                 <TextBox.Text>
