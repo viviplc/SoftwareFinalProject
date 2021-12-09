@@ -14,12 +14,7 @@ namespace FinalProjectSoftware.Classes
 
         private VisaServicesDelegate servicesDelegate = null;
 
-        public Visa()
-        {
-            setupVisaServicesDelegate();
-        }
-
-        private void setupVisaServicesDelegate()
+        public void setupVisaServicesDelegate()
         {
             servicesDelegate += PayVisaFees;
             servicesDelegate += ConfirmAppointment;

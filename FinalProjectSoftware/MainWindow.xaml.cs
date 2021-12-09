@@ -315,6 +315,8 @@ namespace FinalProjectSoftware
                             break;
                     }
 
+                    visa.setupVisaServicesDelegate();
+
                     DateTime today = DateTime.Now;
                     visa.ApplicationDate = today;
                     visa.ExpirationDate = today.AddYears(expirationRange).ToShortDateString();
